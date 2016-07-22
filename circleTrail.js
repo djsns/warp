@@ -9,7 +9,7 @@ function CircleTrail(lineWidth, smoothness) {
 }
 
 CircleTrail.prototype.draw = function(context) {
-  context.strokeStyle = "#AAAAAA";
+  context.strokeStyle = '#AAAAAA';
   context.lineWidth = this.lineWidth;
   context.stroke(this.path);
 }

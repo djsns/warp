@@ -20,7 +20,7 @@ function Circle(x, y, r) {
 }
 
 Circle.prototype.draw = function(context) {
-  context.strokeStyle = "#FFFFFF";
+  context.strokeStyle = '#FFFFFF';
   context.fillStyle = context.strokeStyle;
   context.lineWidth = 1;
 
