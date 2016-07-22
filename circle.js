@@ -36,16 +36,17 @@ Circle.prototype.update = function(now) {
   this.y += this.vy*dt /*+ this.ay*dt*dt*/;
   this.vx += this.ax;
   this.vy += this.ay;
-  this.applyVelocityCap();  
   this.ax = 0;
   this.ay = 0;
   this.previousUpdate = now;
-  this.positionObservers.forEach(o => o.afterCirclePositionUpdate(this.x, this.y));
+  let warped = this.applyVelocityCap();
+  this.positionObservers.forEach(o =>
+    o.afterCirclePositionUpdate(this.x, this.y, warped));
 }
 
 Circle.prototype.applyVelocityCap = function() {
   if(this.speedWarpsEnabled)
-    this.applyVelocityCapWithWarps();
+    return this.applyVelocityCapWithWarps();
   else this.applyVelocityCapWithoutWarps();
 }
 
@@ -64,7 +65,9 @@ Circle.prototype.applyVelocityCapWithWarps = function() {
     this.y += this.speedWarpDistance * this.vy / speed;
     this.vx = 0;
     this.vy = 0;
+    return true;
   }
+  return false;
 }
 
 Circle.prototype.getSpeed = function() {

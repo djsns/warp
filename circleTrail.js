@@ -19,10 +19,14 @@ CircleTrail.prototype.beginObservingCircle = function(x, y) {
   this.setPrevious(x, y);
 }
 
-CircleTrail.prototype.afterCirclePositionUpdate = function(x, y) {
-  if(Math.hypot(x-this.previousX, y-this.previousY) >= this.minStep) {
-    this.path.lineTo(x, y);
-    this.setPrevious(x, y);
+CircleTrail.prototype.afterCirclePositionUpdate = function(x, y, warped) {
+  if(warped) {
+    this.beginObservingCircle(x, y);
+  } else {
+    if(Math.hypot(x-this.previousX, y-this.previousY) >= this.minStep) {
+      this.path.lineTo(x, y);
+      this.setPrevious(x, y);
+    }
   }
 }
 
