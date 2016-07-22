@@ -1,0 +1,31 @@
+body {
+  background-color: rgb(10,10,10);
+  text-align: center;
+  margin: 0;
+}
+main {
+  margin: 0 auto;
+  display: inline-block;
+}
+#gameCanvas {
+  background-color: black;
+}
+h1 {
+  margin: 0.5em 0;
+  color: white;
+  font-family: monospace;
+  font-size: calc(200% + 1vh);
+  position: relative;
+}
+#gameNext {
+  position: absolute;
+  right: 0;
+  top: -0.25em;
+  text-decoration: none;
+  color: aquamarine;
+  font-size: 150%;
+  vertical-align: middle;
+}
+.hidden {
+  display: none;
+}

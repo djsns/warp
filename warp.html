@@ -2,24 +2,16 @@
 <head>
   <meta charset='utf-8'/>
   <title>warp</title>
-  <style>
-    body {
-      background-color: rgb(10,10,10);
-      text-align: center;
-    }
-    canvas {
-      background-color: black;
-    }
-    h1 {
-      color: white;
-      font-family: monospace;
-      font-size: calc(200% + 1vh);
-    }
-  </style>
+  <link rel='stylesheet' href='warp.css'>
 </head>
 <body>
-  <h1 id='gameMessage'>WARP</h1>
-  <canvas id='gameCanvas' width='600' height='600'></canvas>
+  <main>
+    <h1>
+      <span id='gameMessage'>WARP</span>
+      <a id='gameNext' class='hidden' href='#'>==></a>
+    </h1>
+    <canvas id='gameCanvas' width='600' height='600'></canvas>
+  </main>
   <script src='tau.js'></script>
   <script src='controller.js'></script>
   <script src='circle.js'></script>
