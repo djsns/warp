@@ -10,10 +10,16 @@
     canvas {
       background-color: black;
     }
+    h1 {
+      color: white;
+      font-family: monospace;
+      font-size: calc(200% + 1vh);
+    }
   </style>
 </head>
 <body>
-  <canvas width='600' height='600'></canvas>
+  <h1 id='gameMessage'>WARP</h1>
+  <canvas id='gameCanvas' width='600' height='600'></canvas>
   <script src='tau.js'></script>
   <script src='controller.js'></script>
   <script src='circle.js'></script>
