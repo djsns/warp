@@ -8,16 +8,11 @@ let context = canvas.getContext('2d');
 let level = Level(levelsData[0]);
 let controller = Controller(level.circle);
 
-function frame(now) {
-  level.frame(context, now);
-  if(level.isLost()) {
-    message.textContent = 'how could you ;_;';
-  } else if(level.isWon()) {
+level.gameLoop(context, result => {
+  if(result) {
     message.textContent = 'You won, next level:';
     next.classList.remove('hidden');
   } else {
-    window.requestAnimationFrame(frame);
+    message.textContent = 'how could you ;_;';
   }
-}
-
-window.requestAnimationFrame(frame);
+});

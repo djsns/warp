@@ -11,7 +11,14 @@ function Controller(circle) {
     39 : () => {this.circle && this.circle.nudgeRight()},
     40 : () => {this.circle && this.circle.nudgeDown()}
   };
-  document.addEventListener('keydown', event => this.handleKey(event.keyCode));
+
+  let handleEvent = event => this.handleKey(event.keyCode);
+  document.addEventListener('keydown', handleEvent);
+
+  this.detach = function() {
+    document.removeEventListener('keydown', handleEvent);
+    this.circle = null;
+  }
 }
 
 Controller.prototype.handleKey = function(keyCode) {

@@ -79,6 +79,13 @@ Circle.prototype.addPositionObserver = function(o) {
   this.positionObservers.push(o);
 }
 
+Circle.prototype.stop = function() {
+  this.vx = 0;
+  this.vy = 0;
+  this.ax = 0;
+  this.ay = 0;
+}
+
 Circle.prototype.nudgeUp = function() {
   this.ay = -this.nudgeSize;
 }
