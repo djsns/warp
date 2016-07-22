@@ -15,12 +15,15 @@ function Level(levelInfo) {
   
   this.obstacles = levelInfo.obstacles.map(obstacleInfo =>
     ObstacleRect(obstacleInfo.x, obstacleInfo.y, obstacleInfo.width, obstacleInfo.height));
+
+  this.goal = GoalCircle(levelInfo.goal.x, levelInfo.goal.y, levelInfo.goal.r);
 }
 
 Level.prototype.draw = function(context) {
   context.clearRect(0, 0, canvas.width, canvas.height);
   this.obstacles.forEach(o => o.draw(context));
   this.circleTrail.draw(context);
+  this.goal.draw(context);
   this.circle.draw(context);
 }
 
@@ -38,5 +41,5 @@ Level.prototype.isLost = function() {
 }
 
 Level.prototype.isWon = function() {
-  return false;
+  return this.goal.isAchievedByCircle(this.circle);
 }

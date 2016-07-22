@@ -10,6 +10,8 @@ function frame(now) {
   level.frame(context, now);
   if(level.isLost())
     alert('ded');
+  else if(level.isWon())
+    alert('won');
   else window.requestAnimationFrame(frame);
 }
 
