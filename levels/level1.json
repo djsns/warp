@@ -1,0 +1,20 @@
+{
+  circle : {
+    x : 300,
+    y : 300,
+    r : 10
+  },
+  obstacleRects : [
+    {
+      x : 0,
+      y : 0,
+      width : 800,
+      height : 200
+    }
+  ],
+  goal : {
+    x : 500,
+    y : 500,
+    r : 30
+  }
+}
