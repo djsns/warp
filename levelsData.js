@@ -22,7 +22,8 @@ let levelsData = [
         x : 0,
         y : 0,
         width : 800,
-        height : 200
+        height : 200,
+        style : '#444444'
       }
     }
   ],
@@ -32,7 +33,8 @@ let levelsData = [
       x : 500,
       y : 500,
       r : 30,
-      lineWidth : 1
+      lineWidth : 1,
+      style : '#FFFFFF'
     }
   }
 }];
