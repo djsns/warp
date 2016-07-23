@@ -1,27 +1,27 @@
 'use strict';
 
-function CircleTrail(lineWidth, smoothness) {
-  if(!(this instanceof CircleTrail))
-    return new CircleTrail(...arguments);
+function PlayerTrail(lineWidth, smoothness) {
+  if(!(this instanceof PlayerTrail))
+    return new PlayerTrail(...arguments);
 
   this.path = new Path2D;
   this.minStep = smoothness;
 }
 
-CircleTrail.prototype.draw = function(context) {
+PlayerTrail.prototype.draw = function(context) {
   context.strokeStyle = '#AAAAAA';
   context.lineWidth = this.lineWidth;
   context.stroke(this.path);
 }
 
-CircleTrail.prototype.beginObservingCircle = function(x, y) {
+PlayerTrail.prototype.beginObservingPlayer = function(x, y) {
   this.path.moveTo(x, y);
   this.setPrevious(x, y);
 }
 
-CircleTrail.prototype.afterCirclePositionUpdate = function(x, y, warped) {
+PlayerTrail.prototype.afterPlayerPositionUpdate = function(x, y, warped) {
   if(warped) {
-    this.beginObservingCircle(x, y);
+    this.beginObservingPlayer(x, y);
   } else {
     if(Math.hypot(x-this.previousX, y-this.previousY) >= this.minStep) {
       this.path.lineTo(x, y);
@@ -30,7 +30,7 @@ CircleTrail.prototype.afterCirclePositionUpdate = function(x, y, warped) {
   }
 }
 
-CircleTrail.prototype.setPrevious = function(x, y) {
+PlayerTrail.prototype.setPrevious = function(x, y) {
   this.previousX = x;
   this.previousY = y;
 }

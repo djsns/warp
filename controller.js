@@ -1,15 +1,15 @@
 'use strict';
 
-function Controller(circle) {
+function Controller(player) {
   if(!(this instanceof Controller))
     return new Controller(...arguments);
 
-  this.circle = circle;
+  this.player = player;
   this.actions = {
-    37 : () => {this.circle && this.circle.nudgeLeft()},
-    38 : () => {this.circle && this.circle.nudgeUp()},
-    39 : () => {this.circle && this.circle.nudgeRight()},
-    40 : () => {this.circle && this.circle.nudgeDown()}
+    37 : () => {this.player && this.player.nudgeLeft()},
+    38 : () => {this.player && this.player.nudgeUp()},
+    39 : () => {this.player && this.player.nudgeRight()},
+    40 : () => {this.player && this.player.nudgeDown()}
   };
 
   let handleEvent = event => this.handleKey(event.keyCode);
@@ -17,7 +17,7 @@ function Controller(circle) {
 
   this.detach = function() {
     document.removeEventListener('keydown', handleEvent);
-    this.circle = null;
+    this.player = null;
   }
 }
 

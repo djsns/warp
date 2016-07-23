@@ -6,7 +6,8 @@ let canvas = document.getElementById('gameCanvas');
 let context = canvas.getContext('2d');
 
 let level = Level(levelsData[0]);
-let controller = Controller(level.circle);
+debugger;
+let controller = Controller(level.player);
 
 level.gameLoop(context, result => {
   if(result) {

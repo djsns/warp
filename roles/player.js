@@ -1,12 +1,10 @@
 'use strict';
 
-function Circle(x, y, r) {
-  if(!(this instanceof Circle))
-    return new Circle(...arguments);
+function Player(shape) {
+  if(!(this instanceof Player))
+    return new Player(...arguments);
 
-  this.x = x;
-  this.y = y;
-  this.r = r;
+  this.shape = shape;
   this.vx = 0;
   this.vy = 0;
   this.ax = 0;
@@ -19,18 +17,29 @@ function Circle(x, y, r) {
   this.speedWarpsEnabled = true;
 }
 
-Circle.prototype.draw = function(context) {
-  context.strokeStyle = '#FFFFFF';
-  context.fillStyle = context.strokeStyle;
-  context.lineWidth = 1;
+Object.defineProperty(Player.prototype, 'x', {
+  set : function(x) {
+    this.shape.setCenterX(x);
+  },
+  get : function() {
+    return this.shape.getCenterX();
+  }
+});
 
-  context.beginPath();
-  context.arc(this.x, this.y, this.r, 0, Math.TAU);
-  context.fill();
-  context.closePath();
+Object.defineProperty(Player.prototype, 'y', {
+  set : function(y) {
+    this.shape.setCenterY(y);
+  },
+  get : function() {
+    return this.shape.getCenterY();
+  }
+});
+
+Player.prototype.draw = function(context) {
+  this.shape.draw(context);
 }
 
-Circle.prototype.update = function(now) {
+Player.prototype.update = function(now) {
   let dt = now - this.previousUpdate;
   this.x += this.vx*dt /*+ this.ax*dt*dt*/;
   this.y += this.vy*dt /*+ this.ay*dt*dt*/;
@@ -41,16 +50,16 @@ Circle.prototype.update = function(now) {
   this.previousUpdate = now;
   let warped = this.applyVelocityCap();
   this.positionObservers.forEach(o =>
-    o.afterCirclePositionUpdate(this.x, this.y, warped));
+    o.afterPlayerPositionUpdate(this.x, this.y, warped));
 }
 
-Circle.prototype.applyVelocityCap = function() {
+Player.prototype.applyVelocityCap = function() {
   if(this.speedWarpsEnabled)
     return this.applyVelocityCapWithWarps();
   else this.applyVelocityCapWithoutWarps();
 }
 
-Circle.prototype.applyVelocityCapWithoutWarps = function() {
+Player.prototype.applyVelocityCapWithoutWarps = function() {
   let speed = this.getSpeed();
   if(speed > this.maxSpeed) {
     this.vx = this.maxSpeed * this.vx / speed;
@@ -58,7 +67,7 @@ Circle.prototype.applyVelocityCapWithoutWarps = function() {
   }
 }
 
-Circle.prototype.applyVelocityCapWithWarps = function() {
+Player.prototype.applyVelocityCapWithWarps = function() {
   let speed = this.getSpeed();
   if(speed > this.maxSpeed) {
     this.x += this.speedWarpDistance * this.vx / speed;
@@ -70,34 +79,34 @@ Circle.prototype.applyVelocityCapWithWarps = function() {
   return false;
 }
 
-Circle.prototype.getSpeed = function() {
+Player.prototype.getSpeed = function() {
   return Math.hypot(this.vx, this.vy);
 }
 
-Circle.prototype.addPositionObserver = function(o) {
-  o.beginObservingCircle(this.x, this.y);
+Player.prototype.addPositionObserver = function(o) {
+  o.beginObservingPlayer(this.x, this.y);
   this.positionObservers.push(o);
 }
 
-Circle.prototype.stop = function() {
+Player.prototype.stop = function() {
   this.vx = 0;
   this.vy = 0;
   this.ax = 0;
   this.ay = 0;
 }
 
-Circle.prototype.nudgeUp = function() {
+Player.prototype.nudgeUp = function() {
   this.ay = -this.nudgeSize;
 }
 
-Circle.prototype.nudgeDown = function() {
+Player.prototype.nudgeDown = function() {
   this.ay = this.nudgeSize;
 }
 
-Circle.prototype.nudgeLeft = function() {
+Player.prototype.nudgeLeft = function() {
   this.ax = -this.nudgeSize;
 }
 
-Circle.prototype.nudgeRight = function() {
+Player.prototype.nudgeRight = function() {
   this.ax = this.nudgeSize;
 }

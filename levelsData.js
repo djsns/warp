@@ -2,10 +2,14 @@
 
 let levelsData = [
 {
-  circle : {
-    x : 300,
-    y : 300,
-    r : 10,
+  player : {
+    shape : {
+      type : 'circle',
+      x : 300,
+      y : 300,
+      r : 10,
+      style : '#FFFFFF',
+    },
     trail : {
       lineWidth : 2,
       smoothness : 8
@@ -13,15 +17,22 @@ let levelsData = [
   },
   obstacles : [
     {
-      x : 0,
-      y : 0,
-      width : 800,
-      height : 200
+      shape : {
+        type : 'rectangle',
+        x : 0,
+        y : 0,
+        width : 800,
+        height : 200
+      }
     }
   ],
   goal : {
-    x : 500,
-    y : 500,
-    r : 30
+    shape : {
+      type : 'circle',
+      x : 500,
+      y : 500,
+      r : 30,
+      lineWidth : 1
+    }
   }
 }];
