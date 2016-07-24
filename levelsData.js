@@ -8,11 +8,12 @@ let levelsData = [
       x : 300,
       y : 300,
       r : 10,
-      style : '#FFFFFF',
+      style : '#FFFFFF'
     },
     trail : {
       lineWidth : 2,
-      smoothness : 8
+      smoothness : 8,
+      style : '#AAAAAA'
     }
   },
   obstacles : [

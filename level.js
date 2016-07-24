@@ -19,7 +19,8 @@ function Level(levelInfo) {
 
   if(levelInfo.player.trail) {
     this.playerTrail = PlayerTrail(levelInfo.player.trail.lineWidth,
-                                   levelInfo.player.trail.smoothness);
+                                   levelInfo.player.trail.smoothness,
+                                   levelInfo.player.trail.style);
 
     this.player.addPositionObserver(this.playerTrail);
   }

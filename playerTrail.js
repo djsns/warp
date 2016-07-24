@@ -1,15 +1,16 @@
 'use strict';
 
-function PlayerTrail(lineWidth, smoothness) {
+function PlayerTrail(lineWidth, smoothness, style) {
   if(!(this instanceof PlayerTrail))
     return new PlayerTrail(...arguments);
 
   this.path = new Path2D;
   this.minStep = smoothness;
+  this.style = style;
 }
 
 PlayerTrail.prototype.draw = function(context) {
-  context.strokeStyle = '#AAAAAA';
+  context.strokeStyle = this.style;
   context.lineWidth = this.lineWidth;
   context.stroke(this.path);
 }
