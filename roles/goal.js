@@ -1,11 +1,10 @@
 'use strict';
 
-function Goal(shape, parentLevel) {
+function Goal({shape}) {
   if(!(this instanceof Goal))
     return new Goal(...arguments);
 
   this.shape = shape;
-  this.parentLevel = parentLevel;
 }
 
 Goal.prototype.draw = function(context) {

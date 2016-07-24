@@ -1,41 +1,40 @@
 'use strict';
 
 let levelsData = [
-{
-  player : {
-    shape : {
-      type : 'circle',
-      x : 300,
-      y : 300,
-      r : 10,
-      style : '#FFFFFF'
-    },
-    trail : {
+() => {
+  return Level({
+    player : Player({
+      shape : Circle({
+        x : 300,
+        y : 300,
+        r : 10,
+        style : '#FFFFFF',
+      }),
+    }),
+    playerTrail : PlayerTrail({
       lineWidth : 2,
       smoothness : 8,
-      style : '#AAAAAA'
-    }
-  },
-  obstacles : [
-    {
-      shape : {
-        type : 'rectangle',
-        x : 0,
-        y : 0,
-        width : 800,
-        height : 200,
-        style : '#444444'
-      }
-    }
-  ],
-  goal : {
-    shape : {
-      type : 'circle',
-      x : 500,
-      y : 500,
-      r : 30,
-      lineWidth : 1,
-      style : '#FFFFFF'
-    }
-  }
+      style : '#AAAAAA',
+    }),
+    obstacles : [
+      Obstacle({
+        shape : Rectangle({
+          x : 0,
+          y : 0,
+          width : 800,
+          height : 200,
+          style : '#444444',
+        }),
+      }),
+    ],
+    goal : Goal({
+      shape : Circle({
+        x : 500,
+        y : 500,
+        r : 30,
+        style : '#FFFFFF',
+        lineWidth : 1,
+      }),
+    }),
+  });
 }];

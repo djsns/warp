@@ -1,6 +1,6 @@
 'use strict';
 
-function Rectangle(x, y, width, height, fillStyle) {
+function Rectangle({x, y, width, height, style}) {
   if(!(this instanceof Rectangle))
     return new Rectangle(...arguments);
 
@@ -8,7 +8,7 @@ function Rectangle(x, y, width, height, fillStyle) {
   this.y = y;
   this.width = width;
   this.height = height;
-  this.fillStyle = fillStyle;
+  this.style = style;
 }
 
 Rectangle.prototype.getCenterX = function() {
@@ -28,7 +28,7 @@ Rectangle.prototype.setCenterY = function(y) {
 }
 
 Rectangle.prototype.draw = function(context) {
-  context.fillStyle = this.fillStyle;
+  context.fillStyle = this.style;
   context.fillRect(this.x, this.y, this.width, this.height);
 }
 

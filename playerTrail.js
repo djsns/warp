@@ -1,6 +1,6 @@
 'use strict';
 
-function PlayerTrail(lineWidth, smoothness, style) {
+function PlayerTrail({lineWidth, smoothness, style}) {
   if(!(this instanceof PlayerTrail))
     return new PlayerTrail(...arguments);
 

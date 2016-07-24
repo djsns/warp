@@ -1,35 +1,16 @@
 'use strict';
 
-function Level(levelInfo) {
+function Level({player, playerTrail, obstacles, goal}) {
   if(!(this instanceof Level))
     return new Level(...arguments);
 
-  function readShape(shapeInfo) {
-    if(shapeInfo.type === 'circle') {
-      return Circle(shapeInfo.x, shapeInfo.y, shapeInfo.r,
-                    shapeInfo.style, shapeInfo.lineWidth);
-    } else if(shapeInfo.type === 'rectangle') {
-      return Rectangle(shapeInfo.x, shapeInfo.y,
-                       shapeInfo.width, shapeInfo.height, 
-                       shapeInfo.style);
-    }
-  }
-
-  this.player = Player(readShape(levelInfo.player.shape));
-
-  if(levelInfo.player.trail) {
-    this.playerTrail = PlayerTrail(levelInfo.player.trail.lineWidth,
-                                   levelInfo.player.trail.smoothness,
-                                   levelInfo.player.trail.style);
-
+  this.player = player;
+  this.playerTrail = playerTrail;
+  if(this.playerTrail)
     this.player.addPositionObserver(this.playerTrail);
-  }
-
-  this.obstacles = levelInfo.obstacles.map(obstacleInfo =>
-    Obstacle(readShape(obstacleInfo.shape), this));
-
-  this.goal = Goal(readShape(levelInfo.goal.shape), this);
-
+  this.obstacles = obstacles;
+  this.obstacles.forEach(o => o.setParentLevel(this));
+  this.goal = goal;
   this.isLost = false;
   this.isWon = false;
 }

@@ -1,10 +1,13 @@
 'use strict';
 
-function Obstacle(shape, parentLevel) {
+function Obstacle({shape}) {
   if(!(this instanceof Obstacle))
     return new Obstacle(...arguments);
 
   this.shape = shape;
+}
+
+Obstacle.prototype.setParentLevel = function(parentLevel) {
   this.parentLevel = parentLevel;
 }
 

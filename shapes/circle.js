@@ -1,6 +1,6 @@
 'use strict';
 
-function Circle(x, y, r, style, lineWidth) {
+function Circle({x, y, r, style, lineWidth}) {
   if(!(this instanceof Circle))
     return new Circle(...arguments);
 
@@ -8,6 +8,8 @@ function Circle(x, y, r, style, lineWidth) {
   this.y = y;
   this.r = r;
   this.filled = !lineWidth;
+  if(lineWidth)
+    this.lineWidth = lineWidth;
   this.style = style;
 }
 

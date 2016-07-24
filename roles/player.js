@@ -1,6 +1,6 @@
 'use strict';
 
-function Player(shape) {
+function Player({shape}) {
   if(!(this instanceof Player))
     return new Player(...arguments);
 
