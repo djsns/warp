@@ -11,6 +11,7 @@ function Level({player, playerTrail, obstacles, goal}) {
   this.obstacles = obstacles;
   this.obstacles.forEach(o => o.setParentLevel(this));
   this.goal = goal;
+  this.goal.setParentLevel(this);
   this.isLost = false;
   this.isWon = false;
 }

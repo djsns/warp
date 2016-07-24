@@ -7,6 +7,10 @@ function Goal({shape}) {
   this.shape = shape;
 }
 
+Goal.prototype.setParentLevel = function(parentLevel) {
+  this.parentLevel = parentLevel;
+}
+
 Goal.prototype.draw = function(context) {
   this.shape.draw(context);
 }
