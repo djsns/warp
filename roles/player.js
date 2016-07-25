@@ -15,6 +15,7 @@ function Player({shape}) {
   this.positionObservers = [];
   this.speedWarpDistance = 100;
   this.speedWarpsEnabled = true;
+  this.ghostShape = null;
 }
 
 Object.defineProperty(Player.prototype, 'x', {
@@ -35,8 +36,20 @@ Object.defineProperty(Player.prototype, 'y', {
   }
 });
 
+Player.prototype.saveGhost = function() {
+  this.ghostShape = this.shape.createGhost();
+}
+
+Player.prototype.ghostWarp = function() {
+  this.shape.setCenterX(this.ghostShape.getCenterX());
+  this.shape.setCenterY(this.ghostShape.getCenterY());
+  this.ghostShape = null;
+}
+
 Player.prototype.draw = function(context) {
   this.shape.draw(context);
+  if(this.ghostShape)
+    this.ghostShape.draw(context);
 }
 
 Player.prototype.update = function(now) {

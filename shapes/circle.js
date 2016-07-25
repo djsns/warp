@@ -29,6 +29,10 @@ Circle.prototype.setCenterY = function(y) {
   this.y = y;
 }
 
+Circle.prototype.createGhost = function() {
+  return Object.assign(Object.create(this.__proto__), this, {filled : false, lineWidth : 1});
+}
+
 Circle.prototype.draw = function(context) {
   if(this.filled) {
     context.fillStyle = this.style;
