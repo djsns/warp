@@ -9,6 +9,7 @@ let levelsData = [
         y : 300,
         r : 10,
         style : '#FFFFFF',
+        filled : true,
       }),
     }),
     playerTrail : PlayerTrail({
@@ -33,7 +34,7 @@ let levelsData = [
         y : 500,
         r : 30,
         style : '#FFFFFF',
-        lineWidth : 1,
+        filled : false,
       }),
     }),
   });

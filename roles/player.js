@@ -37,7 +37,7 @@ Object.defineProperty(Player.prototype, 'y', {
 });
 
 Player.prototype.saveGhost = function() {
-  this.ghostShape = this.shape.createGhost();
+  this.ghostShape = this.shape.createOutline();
 }
 
 Player.prototype.ghostWarp = function() {
