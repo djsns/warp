@@ -7,15 +7,8 @@ function Goal({shape}) {
   this.shape = shape;
 }
 
-Goal.prototype.setParentLevel = function(parentLevel) {
-  this.parentLevel = parentLevel;
-}
+Goal.prototype = GameplayShape();
 
-Goal.prototype.draw = function(context) {
-  this.shape.draw(context);
-}
-
-Goal.prototype.handlePlayer = function(player) {
-  if(this.shape.contains(player.shape))
-    this.parentLevel.win();
+Goal.prototype.onPlayerInside = function() {
+  this.parentLevel.win();
 }

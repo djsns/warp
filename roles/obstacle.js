@@ -7,15 +7,8 @@ function Obstacle({shape}) {
   this.shape = shape;
 }
 
-Obstacle.prototype.setParentLevel = function(parentLevel) {
-  this.parentLevel = parentLevel;
-}
+Obstacle.prototype = GameplayShape();
 
-Obstacle.prototype.draw = function(context) {
-  this.shape.draw(context);
-}
-
-Obstacle.prototype.handlePlayer = function(player) {
-  if(this.shape.touches(player.shape))
-    this.parentLevel.lose();
+Obstacle.prototype.onPlayerTouch = function() {
+  this.parentLevel.lose();
 }
