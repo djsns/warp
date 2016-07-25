@@ -10,6 +10,7 @@ debugger;
 let controller = Controller(level.player);
 
 level.gameLoop(context, result => {
+  controller.detach();
   if(result) {
     message.textContent = 'You won, next level:';
     next.classList.remove('hidden');

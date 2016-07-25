@@ -1,15 +1,13 @@
 'use strict';
 
-function Circle({x, y, r, style, lineWidth}) {
+function Circle({x, y, r, style, filled}) {
   if(!(this instanceof Circle))
     return new Circle(...arguments);
 
   this.x = x;
   this.y = y;
   this.r = r;
-  this.filled = !lineWidth;
-  if(lineWidth)
-    this.lineWidth = lineWidth;
+  this.filled = filled;
   this.style = style;
 }
 
@@ -29,18 +27,32 @@ Circle.prototype.setCenterY = function(y) {
   this.y = y;
 }
 
+Circle.prototype.createOutline = function() {
+  let outline = Object.assign(Object.create(this.__proto__), this);
+  outline.filled = false;
+  return outline;
+}
+
 Circle.prototype.draw = function(context) {
-  if(this.filled) {
-    context.fillStyle = this.style;
-  } else {
-    context.strokeStyle = this.style;
-    context.lineWidth = this.lineWidth;
-  }
+  if(this.filled)
+    this.drawFilled(context);
+  else this.drawEmpty(context);
+}
+
+Circle.prototype.drawFilled = function(context) {
+  context.fillStyle = this.style;
   context.beginPath();
   context.arc(this.x, this.y, this.r, 0, Math.TAU);
-  if(this.filled)
-    context.fill();
-  else context.stroke();
+  context.fill();
+  context.closePath();
+}
+
+Circle.prototype.drawEmpty = function(context) {
+  context.strokeStyle = this.style;
+  context.lineWidth = 1;
+  context.beginPath();
+  context.arc(this.x, this.y, this.r-0.5, 0, Math.TAU);
+  context.stroke();
   context.closePath();
 }
 

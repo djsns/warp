@@ -20,15 +20,15 @@ PlayerTrail.prototype.beginObservingPlayer = function(x, y) {
   this.setPrevious(x, y);
 }
 
-PlayerTrail.prototype.afterPlayerPositionUpdate = function(x, y, warped) {
-  if(warped) {
-    this.beginObservingPlayer(x, y);
-  } else {
-    if(Math.hypot(x-this.previousX, y-this.previousY) >= this.minStep) {
-      this.path.lineTo(x, y);
-      this.setPrevious(x, y);
-    }
+PlayerTrail.prototype.afterPlayerMoved = function(x, y) {
+  if(Math.hypot(x-this.previousX, y-this.previousY) >= this.minStep) {
+    this.path.lineTo(x, y);
+    this.setPrevious(x, y);
   }
+}
+
+PlayerTrail.prototype.afterPlayerWarped = function(x, y) {
+  this.beginObservingPlayer(x, y);
 }
 
 PlayerTrail.prototype.setPrevious = function(x, y) {
