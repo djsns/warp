@@ -22,7 +22,7 @@ let levelsData = [
         shape : Rectangle({
           x : 0,
           y : 0,
-          width : 800,
+          width : 600,
           height : 200,
           style : '#444444',
         }),
