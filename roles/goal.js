@@ -1,10 +1,10 @@
 'use strict';
 
-function Goal({shape}) {
+function Goal(args) {
   if(!(this instanceof Goal))
     return new Goal(...arguments);
 
-  this.shape = shape;
+  this.shape = args.shape;
 }
 
 Goal.prototype = GameplayShape();

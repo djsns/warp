@@ -1,16 +1,16 @@
 'use strict';
 
-function Level({player, playerTrail, obstacles, goal}) {
+function Level(args) {
   if(!(this instanceof Level))
     return new Level(...arguments);
 
-  this.player = player;
-  this.playerTrail = playerTrail;
+  this.player = args.player;
+  this.playerTrail = args.playerTrail;
   if(this.playerTrail)
     this.player.addPositionObserver(this.playerTrail);
-  this.obstacles = obstacles;
+  this.obstacles = args.obstacles;
   this.obstacles.forEach(o => o.setParentLevel(this));
-  this.goal = goal;
+  this.goal = args.goal;
   this.goal.setParentLevel(this);
   this.isLost = false;
   this.isWon = false;

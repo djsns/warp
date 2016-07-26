@@ -1,10 +1,10 @@
 'use strict';
 
-function Player({shape}) {
+function Player(args) {
   if(!(this instanceof Player))
     return new Player(...arguments);
 
-  this.shape = shape;
+  this.shape = args.shape;
   this.vx = 0;
   this.vy = 0;
   this.ax = 0;

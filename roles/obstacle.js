@@ -1,10 +1,10 @@
 'use strict';
 
-function Obstacle({shape}) {
+function Obstacle(args) {
   if(!(this instanceof Obstacle))
     return new Obstacle(...arguments);
 
-  this.shape = shape;
+  this.shape = args.shape;
 }
 
 Obstacle.prototype = GameplayShape();

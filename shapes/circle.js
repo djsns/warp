@@ -1,14 +1,14 @@
 'use strict';
 
-function Circle({x, y, r, style, filled}) {
+function Circle(args) {
   if(!(this instanceof Circle))
     return new Circle(...arguments);
 
-  this.x = x;
-  this.y = y;
-  this.r = r;
-  this.filled = filled;
-  this.style = style;
+  this.x = args.x;
+  this.y = args.y;
+  this.r = args.r;
+  this.filled = args.filled;
+  this.style = args.style;
 }
 
 Circle.prototype.getCenterX = function() {

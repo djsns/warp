@@ -1,14 +1,14 @@
 'use strict';
 
-function Rectangle({x, y, width, height, style}) {
+function Rectangle(args) {
   if(!(this instanceof Rectangle))
     return new Rectangle(...arguments);
 
-  this.x = x;
-  this.y = y;
-  this.width = width;
-  this.height = height;
-  this.style = style;
+  this.x = args.x;
+  this.y = args.y;
+  this.width = args.width;
+  this.height = args.height;
+  this.style = args.style;
 }
 
 Rectangle.fromCenter = function(args) {
