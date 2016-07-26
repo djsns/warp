@@ -54,10 +54,10 @@ const levelFactory = {
       return Level({
         player : this.createTypicalPlayer(300, 300),
         playerTrail : this.createTypicalPlayerTrail(),
-        obstacles : [
+        gameplayObjects : [
+          this.createTypicalGoal(500, 500),
           this.createTypicalRectangleObstacle('fromCorner', 0, 0, 600, 200),
         ],
-        goal : this.createTypicalGoal(500, 500),
       });
     },
 
@@ -65,8 +65,8 @@ const levelFactory = {
       return Level({
         player : this.createTypicalPlayer(60, 540),
         playerTrail : this.createTypicalPlayerTrail(),
-        goal : this.createTypicalGoal(525, 60),
-        obstacles : [
+        gameplayObjects : [
+          this.createTypicalGoal(525, 60),
           this.createTypicalRectangleObstacle('fromCorner', 75, 0, 70, 120),
           this.createTypicalRectangleObstacle('fromCorner', 205, 0, 70, 120),
           this.createTypicalRectangleObstacle('fromCorner', 380, 0, 70, 120),

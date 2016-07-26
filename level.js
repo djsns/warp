@@ -8,26 +8,22 @@ function Level(args) {
   this.playerTrail = args.playerTrail;
   if(this.playerTrail)
     this.player.addPositionObserver(this.playerTrail);
-  this.obstacles = args.obstacles;
-  this.obstacles.forEach(o => o.setParentLevel(this));
-  this.goal = args.goal;
-  this.goal.setParentLevel(this);
+  this.gameplayObjects = args.gameplayObjects;
+  this.gameplayObjects.forEach(o => o.setParentLevel(this));
   this.isLost = false;
   this.isWon = false;
 }
 
 Level.prototype.draw = function(context) {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  this.obstacles.forEach(o => o.draw(context));
   this.playerTrail.draw(context);
-  this.goal.draw(context);
+  this.gameplayObjects.forEach(o => o.draw(context));
   this.player.draw(context);
 }
 
 Level.prototype.update = function(now) {
   this.player.update(now);
-  this.goal.handlePlayer(this.player);
-  this.obstacles.forEach(o => o.handlePlayer(this.player));
+  this.gameplayObjects.forEach(o => o.handlePlayer(this.player));
 }
 
 Level.prototype.frame = function(context, now) {
