@@ -13,6 +13,7 @@ level.gameLoop(context, result => {
   if(result) {
     message.textContent = 'You won, next level:';
     next.classList.remove('hidden');
+    next.focus();
   } else {
     message.textContent = 'how could you ;_;';
   }

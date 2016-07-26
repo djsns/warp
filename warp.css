@@ -23,6 +23,7 @@ h1 {
   right: 0;
   top: -0.25em;
   text-decoration: none;
+  outline: none;
   color: aquamarine;
   font-size: 150%;
   vertical-align: middle;
