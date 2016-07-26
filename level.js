@@ -33,18 +33,14 @@ Level.prototype.update = function(now) {
 Level.prototype.frame = function(context, now) {
   this.update(now);
   this.draw(context);
-  if(this.isLost)
-    return false;
-  else if(this.isWon)
-    return true;
 }
 
 Level.prototype.gameLoop = function(context, callback) {
   let gameLoopFrame = now => {
-    let result = this.frame(context, now);
-    if(result !== undefined) {
+    this.frame(context, now);
+    if(this.isWon || this.isLost) {
       this.player.stop();
-      callback(result);
+      callback(this.isWon);
     }
     window.requestAnimationFrame(gameLoopFrame);
   }
