@@ -62,7 +62,7 @@ Player.prototype.draw = function(context) {
 }
 
 Player.prototype.update = function(now) {
-  let dt = now - this.previousUpdate;
+  const dt = now - this.previousUpdate;
   this.x += this.vx*dt;
   this.y += this.vy*dt;
   this.vx += this.ax;
@@ -77,7 +77,7 @@ Player.prototype.update = function(now) {
 }
 
 Player.prototype.applyVelocityCap = function() {
-  let speed = this.getSpeed();
+  const speed = this.getSpeed();
   if(speed > this.maxSpeed) {
     this.vx = this.maxSpeed * this.vx / speed;
     this.vy = this.maxSpeed * this.vy / speed;
@@ -85,7 +85,7 @@ Player.prototype.applyVelocityCap = function() {
 }
 
 Player.prototype.attemptSpeedWarp = function() {
-  let speed = this.getSpeed();
+  const speed = this.getSpeed();
   if(speed > this.maxSpeed) {
     this.x += this.speedWarpDistance * this.vx / speed;
     this.y += this.speedWarpDistance * this.vy / speed;

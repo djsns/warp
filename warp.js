@@ -1,9 +1,9 @@
 'use strict';
 
-let message = document.getElementById('gameMessage');
-let next = document.getElementById('gameNext');
-let canvas = document.getElementById('gameCanvas');
-let context = canvas.getContext('2d');
+const message = document.getElementById('gameMessage');
+const next = document.getElementById('gameNext');
+const canvas = document.getElementById('gameCanvas');
+const context = canvas.getContext('2d');
 
 let level = levelFactory.createLevelNumber(1);
 let controller = Controller(level.player);

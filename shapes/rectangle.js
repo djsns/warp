@@ -12,7 +12,7 @@ function Rectangle(args) {
 }
 
 Rectangle.fromCenter = function(args) {
-  let result = Rectangle(args);
+  const result = Rectangle(args);
   result.setCenterX(args.x);
   result.setCenterY(args.y);
   return result;
@@ -56,9 +56,9 @@ Rectangle.prototype.touchesCircle = function(circle) {
     else return x;
   }
 
-  let closestX = fitNumberIntoRange(circle.x, this.x, this.x+this.width);
-  let closestY = fitNumberIntoRange(circle.y, this.y, this.y+this.height);
+  const closestX = fitNumberIntoRange(circle.x, this.x, this.x+this.width);
+  const closestY = fitNumberIntoRange(circle.y, this.y, this.y+this.height);
 
-  let distance = Math.hypot(circle.x-closestX, circle.y - closestY);
+  const distance = Math.hypot(circle.x-closestX, circle.y - closestY);
   return distance < circle.r;
 }

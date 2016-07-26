@@ -20,7 +20,7 @@ function Controller(player) {
   };
 
   this.handleKeyEvent = event => {
-    let action = this.actions[event.type] && this.actions[event.type][event.keyCode];
+    const action = this.actions[event.type] && this.actions[event.type][event.keyCode];
     if(action)
       action.call(this);
   };

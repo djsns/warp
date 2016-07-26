@@ -28,7 +28,7 @@ Circle.prototype.setCenterY = function(y) {
 }
 
 Circle.prototype.createOutline = function() {
-  let outline = Object.assign(Object.create(this.__proto__), this);
+  const outline = Object.assign(Object.create(this.__proto__), this);
   outline.filled = false;
   return outline;
 }
@@ -63,8 +63,8 @@ Circle.prototype.touches = function(other) {
 }
 
 Circle.prototype.touchesCircle = function(otherCircle) {
-  let distance = Math.hypot(otherCircle.x-this.x, otherCircle.y-this.y);
-  let radiusSum = this.r+otherCircle.r;
+  const distance = Math.hypot(otherCircle.x-this.x, otherCircle.y-this.y);
+  const radiusSum = this.r+otherCircle.r;
   return distance <= radiusSum;
 }
 
@@ -73,7 +73,7 @@ Circle.prototype.contains = function(other) {
 }
 
 Circle.prototype.isContainedByCircle = function(otherCircle) {
-  let distance = Math.hypot(otherCircle.x-this.x, otherCircle.y-this.y);
-  let radiusDifference = otherCircle.r-this.r;
+  const distance = Math.hypot(otherCircle.x-this.x, otherCircle.y-this.y);
+  const radiusDifference = otherCircle.r-this.r;
   return distance <= radiusDifference;
 }

@@ -36,7 +36,7 @@ Level.prototype.frame = function(context, now) {
 }
 
 Level.prototype.gameLoop = function(context, callback) {
-  let gameLoopFrame = now => {
+  const gameLoopFrame = now => {
     this.frame(context, now);
     if(this.isWon || this.isLost) {
       this.player.stop();
