@@ -11,6 +11,15 @@ function Rectangle({x, y, width, height, style}) {
   this.style = style;
 }
 
+Rectangle.fromCenter = function(args) {
+  let result = Rectangle(args);
+  result.setCenterX(args.x);
+  result.setCenterY(args.y);
+  return result;
+}
+
+Rectangle.fromCorner = Rectangle;
+
 Rectangle.prototype.getCenterX = function() {
   return this.x + this.width/2;
 }
