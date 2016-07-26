@@ -21,7 +21,7 @@ let levelFactory = {
     return PlayerTrail({
       lineWidth : 2,
       smoothness : 8,
-      style : '#AAAAAA',
+      style : '#555555',
     });
   },
 

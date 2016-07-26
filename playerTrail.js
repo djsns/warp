@@ -6,6 +6,7 @@ function PlayerTrail({lineWidth, smoothness, style}) {
 
   this.path = new Path2D;
   this.minStep = smoothness;
+  this.lineWidth = lineWidth;
   this.style = style;
 }
 
