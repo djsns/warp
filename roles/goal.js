@@ -2,7 +2,7 @@
 
 function Goal(args) {
   if(!(this instanceof Goal))
-    return new Goal(...arguments);
+    return new Goal(args);
 
   this.shape = args.shape;
 }

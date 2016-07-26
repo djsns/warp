@@ -2,7 +2,7 @@
 
 function PlayerTrail(args) {
   if(!(this instanceof PlayerTrail))
-    return new PlayerTrail(...arguments);
+    return new PlayerTrail(args);
 
   this.path = new Path2D;
   this.minStep = args.smoothness;

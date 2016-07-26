@@ -2,7 +2,7 @@
 
 function Obstacle(args) {
   if(!(this instanceof Obstacle))
-    return new Obstacle(...arguments);
+    return new Obstacle(args);
 
   this.shape = args.shape;
 }

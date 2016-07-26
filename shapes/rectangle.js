@@ -2,7 +2,7 @@
 
 function Rectangle(args) {
   if(!(this instanceof Rectangle))
-    return new Rectangle(...arguments);
+    return new Rectangle(args);
 
   this.x = args.x;
   this.y = args.y;

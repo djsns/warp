@@ -2,7 +2,7 @@
 
 function Controller(player) {
   if(!(this instanceof Controller))
-    return new Controller(...arguments);
+    return new Controller(player);
 
   this.player = player;
   this.actions = {

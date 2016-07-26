@@ -2,7 +2,7 @@
 
 function Player(args) {
   if(!(this instanceof Player))
-    return new Player(...arguments);
+    return new Player(args);
 
   this.shape = args.shape;
   this.vx = 0;

@@ -2,7 +2,7 @@
 
 function Circle(args) {
   if(!(this instanceof Circle))
-    return new Circle(...arguments);
+    return new Circle(args);
 
   this.x = args.x;
   this.y = args.y;

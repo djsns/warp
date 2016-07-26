@@ -2,7 +2,7 @@
 
 function Level(args) {
   if(!(this instanceof Level))
-    return new Level(...arguments);
+    return new Level(args);
 
   this.player = args.player;
   this.playerTrail = args.playerTrail;

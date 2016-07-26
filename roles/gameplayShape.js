@@ -2,7 +2,7 @@
 
 function GameplayShape() {
   if(!(this instanceof GameplayShape))
-    return new GameplayShape(...arguments);
+    return new GameplayShape();
 }
 
 GameplayShape.prototype.setParentLevel = function(parentLevel) {
