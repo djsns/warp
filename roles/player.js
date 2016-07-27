@@ -37,14 +37,17 @@ Object.defineProperty(Player.prototype, 'y', {
 });
 
 Player.prototype.saveGhost = function() {
-  this.ghostShape = this.shape.createOutline();
+  if(!this.ghostShape)
+    this.ghostShape = this.shape.createOutline();
 }
 
 Player.prototype.ghostWarp = function() {
-  this.shape.setCenterX(this.ghostShape.getCenterX());
-  this.shape.setCenterY(this.ghostShape.getCenterY());
-  this.ghostShape = null;
-  this.notifyObserversAboutWarp();
+  if(this.ghostShape) {
+    this.shape.setCenterX(this.ghostShape.getCenterX());
+    this.shape.setCenterY(this.ghostShape.getCenterY());
+    this.ghostShape = null;
+    this.notifyObserversAboutWarp();
+  }
 }
 
 Player.prototype.notifyObserversAboutWarp = function() {
