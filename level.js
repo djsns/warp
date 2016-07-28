@@ -56,17 +56,17 @@ Level.prototype.addResultListener = function(o) {
 }
 
 Level.prototype.win = function() {
-  if(this.isFinished)
-    return;
-  this.isFinished = true;
-  this.player.stop();
-  this.resultListeners.forEach(o => o(true));
+  this.finishWithResult(true);
 }
 
 Level.prototype.lose = function() {
+  this.finishWithResult(false);
+}
+
+Level.prototype.finishWithResult = function(result) {
   if(this.isFinished)
     return;
   this.isFinished = true;
   this.player.stop();
-  this.resultListeners.forEach(o => o(false));
+  this.resultListeners.forEach(o => o(result));
 }
