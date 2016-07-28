@@ -20,6 +20,8 @@ Rectangle.fromCenter = function(args) {
 
 Rectangle.fromCorner = Rectangle;
 
+Rectangle.prototype = Shape();
+
 Rectangle.prototype.getCenterX = function() {
   return this.x + this.width/2;
 }
@@ -41,23 +43,13 @@ Rectangle.prototype.draw = function(context) {
   context.fillRect(this.x, this.y, this.width, this.height);
 }
 
-Rectangle.prototype.touches = function(other) {
-  if(other.touchesRectangle)
-    return other.touchesRectangle(this);
-  else return other.touches(this);
+Rectangle.prototype.getShapeName = function() {
+  return 'Rectangle';
 }
 
 Rectangle.prototype.touchesCircle = function(circle) {
-  function fitNumberIntoRange(x, min, max) {
-    if(x < min)
-      return min;
-    else if(x > max)
-      return max;
-    else return x;
-  }
-
-  const closestX = fitNumberIntoRange(circle.x, this.x, this.x+this.width);
-  const closestY = fitNumberIntoRange(circle.y, this.y, this.y+this.height);
+  const closestX = mathUtils.fitNumberIntoRange(circle.x, this.x, this.x+this.width);
+  const closestY = mathUtils.fitNumberIntoRange(circle.y, this.y, this.y+this.height);
 
   const distance = Math.hypot(circle.x-closestX, circle.y - closestY);
   return distance < circle.r;

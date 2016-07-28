@@ -48,6 +48,18 @@ const levelFactory = {
       }),
     });
   },
+  
+  createTypicalBounds(width, height) {
+    return Bounds({
+      shape : Rectangle.fromCorner({
+        x : 0,
+        y : 0,
+        width : width,
+        height : height,
+        style : 'transparent',
+      }),
+    });
+  },
 
   factories : [
     function() {
@@ -55,6 +67,7 @@ const levelFactory = {
         player : this.createTypicalPlayer(300, 300),
         playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
+          this.createTypicalBounds(600, 600),
           this.createTypicalGoal(500, 500),
           this.createTypicalRectangleObstacle('fromCorner', 0, 0, 600, 200),
         ],
@@ -66,6 +79,7 @@ const levelFactory = {
         player : this.createTypicalPlayer(60, 540),
         playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
+          this.createTypicalBounds(600, 600),
           this.createTypicalGoal(525, 60),
           this.createTypicalRectangleObstacle('fromCorner', 75, 0, 70, 120),
           this.createTypicalRectangleObstacle('fromCorner', 205, 0, 70, 120),

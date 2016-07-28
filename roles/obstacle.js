@@ -7,7 +7,7 @@ function Obstacle(args) {
   this.shape = args.shape;
 }
 
-Obstacle.prototype = GameplayShape();
+Obstacle.prototype = GameplayObject();
 
 Obstacle.prototype.onPlayerTouch = function() {
   this.parentLevel.lose();

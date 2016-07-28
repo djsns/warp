@@ -7,7 +7,7 @@ function Goal(args) {
   this.shape = args.shape;
 }
 
-Goal.prototype = GameplayShape();
+Goal.prototype = GameplayObject();
 
 Goal.prototype.onPlayerInside = function() {
   this.parentLevel.win();
