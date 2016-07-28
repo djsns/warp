@@ -16,7 +16,7 @@ const levelFactory = {
       }),
     });
   },
-  
+
   createTypicalPlayerTrail : function() {
     return PlayerTrail({
       lineWidth : 2,
@@ -48,7 +48,7 @@ const levelFactory = {
       }),
     });
   },
-  
+
   createTypicalBounds(width, height) {
     return Bounds({
       shape : Rectangle.fromCorner({
