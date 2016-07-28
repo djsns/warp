@@ -1,11 +1,12 @@
 'use strict';
 
-function Controller(player) {
+function Controller(player, level) {
   if(!(this instanceof Controller))
-    return new Controller(player);
+    return new Controller(player, level);
 
   this.player = player;
-  this.actions = {
+  this.level = level;
+  this.keyActions = {
     keydown : {
       17 : () => {this.player && this.player.saveGhost()},
       37 : () => {this.player && this.player.nudgeLeft()},
@@ -19,18 +20,29 @@ function Controller(player) {
     },
   };
 
+  this.handleVisibilityChange = () => {
+    if(document.hidden)
+      this.level && this.level.pauseGameLoop();
+    else this.level && this.level.startGameLoop(context);
+  };
+
   this.handleKeyEvent = event => {
-    const action = this.actions[event.type] && this.actions[event.type][event.keyCode];
+    const action = this.keyActions[event.type] && this.keyActions[event.type][event.keyCode];
     if(action)
       action.call(this);
   };
 
   document.addEventListener('keydown', this.handleKeyEvent);
   document.addEventListener('keyup', this.handleKeyEvent);
+  document.addEventListener('visibilitychange', this.handleVisibilityChange);
 
-  this.detach = function() {
+  this.detach = () => {
     document.removeEventListener('keydown', this.handleKeyEvent);
     document.removeEventListener('keyup', this.handleKeyEvent);
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
     this.player = null;
+    this.level = null;
   }
+
+  this.level.addResultListener(this.detach);
 }

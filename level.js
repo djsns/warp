@@ -10,8 +10,9 @@ function Level(args) {
     this.player.addPositionObserver(this.playerTrail);
   this.gameplayObjects = args.gameplayObjects;
   this.gameplayObjects.forEach(o => o.setParentLevel(this));
-  this.isLost = false;
-  this.isWon = false;
+  this.resultListeners = [];
+  this.isPaused = true;
+  this.isFinished = false;
 }
 
 Level.prototype.draw = function(context) {
@@ -21,33 +22,51 @@ Level.prototype.draw = function(context) {
   this.player.draw(context);
 }
 
-Level.prototype.update = function(now) {
-  this.player.update(now);
+Level.prototype.update = function(dt) {
+  this.player.update(dt);
   this.gameplayObjects.forEach(o => o.handlePlayer(this.player));
 }
 
-Level.prototype.frame = function(context, now) {
-  this.update(now);
+Level.prototype.frame = function(context, dt) {
+  this.update(dt);
   this.draw(context);
 }
 
-Level.prototype.gameLoop = function(context, callback) {
+Level.prototype.startGameLoop = function(context) {
   const gameLoopFrame = now => {
-    this.frame(context, now);
-    if(this.isWon || this.isLost) {
-      this.player.stop();
-      callback(this.isWon);
+    if(!this.isPaused) {
+      const dt = now - this.lastFrameTime;
+      this.frame(context, dt);
+      window.requestAnimationFrame(gameLoopFrame);
     }
-    window.requestAnimationFrame(gameLoopFrame);
+    this.lastFrameTime = now;
   }
 
+  this.isPaused = false;
+  this.lastFrameTime = performance.now();
   window.requestAnimationFrame(gameLoopFrame);
 }
 
+Level.prototype.pauseGameLoop = function() {
+  this.isPaused = true;
+}
+
+Level.prototype.addResultListener = function(o) {
+  this.resultListeners.push(o);
+}
+
 Level.prototype.win = function() {
-  this.isWon = true;
+  if(this.isFinished)
+    return;
+  this.isFinished = true;
+  this.player.stop();
+  this.resultListeners.forEach(o => o(true));
 }
 
 Level.prototype.lose = function() {
-  this.isLost = true;
+  if(this.isFinished)
+    return;
+  this.isFinished = true;
+  this.player.stop();
+  this.resultListeners.forEach(o => o(false));
 }

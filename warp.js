@@ -13,11 +13,12 @@ const banner = Banner({
 });
 
 const level = levelFactory.createLevelNumber(1);
-const controller = Controller(level.player);
+const controller = Controller(level.player, level);
 
-level.gameLoop(context, result => {
-  controller.detach();
+level.addResultListener(result => {
   if(result)
     banner.reportVictory();
   else banner.reportFailure();
 });
+
+level.startGameLoop(context);

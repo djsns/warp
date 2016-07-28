@@ -9,7 +9,6 @@ function Player(args) {
   this.vy = 0;
   this.ax = 0;
   this.ay = 0;
-  this.previousUpdate = performance.now();
   this.nudgeSize = 0.005;
   this.maxSpeed = 0.1;
   this.positionObservers = [];
@@ -64,15 +63,13 @@ Player.prototype.draw = function(context) {
     this.ghostShape.draw(context);
 }
 
-Player.prototype.update = function(now) {
-  const dt = now - this.previousUpdate;
+Player.prototype.update = function(dt) {
   this.x += this.vx*dt;
   this.y += this.vy*dt;
   this.vx += this.ax;
   this.vy += this.ay;
   this.ax = 0;
   this.ay = 0;
-  this.previousUpdate = now;
   if(this.speedWarpsEnabled)
     this.attemptSpeedWarp();
   this.applyVelocityCap();
