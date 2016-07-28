@@ -21,7 +21,7 @@ const levelFactory = {
     return PlayerTrail({
       lineWidth : 2,
       smoothness : 8,
-      style : '#555555',
+      style : '#444444',
     });
   },
 
