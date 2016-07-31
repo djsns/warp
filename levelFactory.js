@@ -44,7 +44,7 @@ const levelFactory = {
         y : y,
         width : width,
         height : height,
-        style : style || '#444444',
+        style : (this.isDuringDevelopment && style) || '#444444',
       }),
     });
   },
@@ -149,4 +149,6 @@ const levelFactory = {
       });
     },
   ],
+
+  isDuringDevelopment : false,
 };
