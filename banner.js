@@ -7,7 +7,6 @@ function Banner(args) {
   this.message = args.message;
   this.next = args.next;
   this.retry = args.retry;
-  this.reset();
 }
 
 Banner.prototype.reportVictory = function() {
