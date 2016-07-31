@@ -1,21 +1,40 @@
 'use strict';
 
-const banner = Banner({
-  message : document.getElementById('gameMessage'),
-  next : document.getElementById('gameNext'),
-  retry : document.getElementById('gameRetry'),
-});
+const context = document.getElementById('gameCanvas').getContext('2d');
 
-const canvas = document.getElementById('gameCanvas');
-const context = canvas.getContext('2d');
+const game = {
+  startCurrentLevel : function() {
+    this.banner.reset();
 
-const level = levelFactory.createLevelNumber(2);
-const controller = Controller(level.player, level);
+    const level = levelFactory.createLevelNumber(this.currentLevelNumber);
+    const controller = Controller(level.player, level);
 
-level.addResultListener(result => {
-  if(result)
-    banner.reportVictory();
-  else banner.reportFailure();
-});
+    level.addResultListener(result => {
+      if(result)
+        this.banner.reportVictory();
+      else this.banner.reportFailure();
+    });
 
-level.startGameLoop(context);
+    level.startGameLoop(context);
+  },
+
+  startNextLevel : function() {
+    ++this.currentLevelNumber;
+    this.startCurrentLevel();
+  },
+
+  currentLevelNumber : 0,
+
+  banner : Banner({
+    message : document.getElementById('gameMessage'),
+    next : document.getElementById('gameNext'),
+    retry : document.getElementById('gameRetry'),
+  }),
+};
+
+document.getElementById('gameNext').addEventListener('click', () =>
+  game.startNextLevel());
+document.getElementById('gameRetry').addEventListener('click', () =>
+  game.startCurrentLevel());
+
+game.startCurrentLevel();

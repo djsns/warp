@@ -16,7 +16,7 @@ function Level(args) {
 }
 
 Level.prototype.draw = function(context) {
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
   this.playerTrail.draw(context);
   this.gameplayObjects.forEach(o => o.draw(context));
   this.player.draw(context);
