@@ -1,6 +1,6 @@
 'use strict';
 
-const levelFactory = {
+const normalLevelFactory = {
   createLevelNumber : function(n) {
     return this.factories[n].call(this);
   },
