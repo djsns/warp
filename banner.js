@@ -20,12 +20,15 @@ Banner.prototype.reportFailure = function() {
   this.printMessage('how could you ;_;');
   this.hideElement(this.next);
   this.showElement(this.retry);
+  this.retry.focus();
 }
 
 Banner.prototype.reset = function() {
   this.printMessage('WARP');
   this.hideElement(this.next);
   this.hideElement(this.retry);
+  this.next.blur();
+  this.retry.blur();
 }
 
 Banner.prototype.printMessage = function(message) {
