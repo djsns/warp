@@ -9,7 +9,10 @@ function Level(args) {
   if(this.playerTrail)
     this.playerTrail.beginObservingPlayer(this.player);
   this.gameplayObjects = args.gameplayObjects;
-  this.gameplayObjects.forEach(o => o.setParentLevel(this));
+  this.gameplayObjects.forEach(o => {
+    o.setParentLevel(this);
+    o.beginObservingPlayer(this.player);
+  });
   this.resultListeners = [];
   this.isPaused = true;
   this.isFinished = false;
@@ -24,7 +27,6 @@ Level.prototype.draw = function(context) {
 
 Level.prototype.update = function(dt) {
   this.player.update(dt);
-  this.gameplayObjects.forEach(o => o.handlePlayer(this.player));
 }
 
 Level.prototype.frame = function(context, dt) {

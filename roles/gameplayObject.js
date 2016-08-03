@@ -9,11 +9,15 @@ GameplayObject.prototype.setParentLevel = function(parentLevel) {
   this.parentLevel = parentLevel;
 }
 
+GameplayObject.prototype.beginObservingPlayer = function(player) {
+  player.addMovementObserver(this);
+}
+
 GameplayObject.prototype.draw = function(context) {
   this.shape.draw(context);
 }
 
-GameplayObject.prototype.handlePlayer = function(player) {
+GameplayObject.prototype.afterPlayerMoved = function(player) {
   const containsPlayer = this.shape.contains(player.shape);
   const touchesPlayer = this.shape.touches(player.shape);
   if(containsPlayer && this.onPlayerInside)
