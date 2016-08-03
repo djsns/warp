@@ -11,7 +11,8 @@ function Player(args) {
   this.ay = 0;
   this.nudgeSize = 0.005;
   this.maxSpeed = 0.1;
-  this.positionObservers = [];
+  this.movementObservers = [];
+  this.warpObservers = [];
   this.speedWarpDistance = 100;
   this.speedWarpsEnabled = true;
   this.ghostShape = null;
@@ -50,11 +51,11 @@ Player.prototype.ghostWarp = function() {
 }
 
 Player.prototype.notifyObserversAboutWarp = function() {
-  this.positionObservers.forEach(o => o.afterPlayerWarped(this.x, this.y));
+  this.warpObservers.forEach(o => o.afterPlayerWarped(this));
 }
 
 Player.prototype.notifyObserversAboutMovement = function() {
-  this.positionObservers.forEach(o => o.afterPlayerMoved(this.x, this.y));
+  this.movementObservers.forEach(o => o.afterPlayerMoved(this));
 }
 
 Player.prototype.draw = function(context) {
@@ -99,9 +100,12 @@ Player.prototype.getSpeed = function() {
   return Math.hypot(this.vx, this.vy);
 }
 
-Player.prototype.addPositionObserver = function(o) {
-  o.beginObservingPlayer(this.x, this.y);
-  this.positionObservers.push(o);
+Player.prototype.addMovementObserver = function(o) {
+  this.movementObservers.push(o);
+}
+
+Player.prototype.addWarpObserver = function(o) {
+  this.warpObservers.push(o);
 }
 
 Player.prototype.stop = function() {

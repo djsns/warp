@@ -7,7 +7,7 @@ function Level(args) {
   this.player = args.player;
   this.playerTrail = args.playerTrail;
   if(this.playerTrail)
-    this.player.addPositionObserver(this.playerTrail);
+    this.playerTrail.beginObservingPlayer(this.player);
   this.gameplayObjects = args.gameplayObjects;
   this.gameplayObjects.forEach(o => o.setParentLevel(this));
   this.resultListeners = [];

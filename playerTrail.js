@@ -16,20 +16,23 @@ PlayerTrail.prototype.draw = function(context) {
   context.stroke(this.path);
 }
 
-PlayerTrail.prototype.beginObservingPlayer = function(x, y) {
-  this.path.moveTo(x, y);
-  this.setPrevious(x, y);
+PlayerTrail.prototype.beginObservingPlayer = function(player) {
+  player.addMovementObserver(this);
+  player.addWarpObserver(this);
+  this.path.moveTo(player.x, player.y);
+  this.setPrevious(player.x, player.y);
 }
 
-PlayerTrail.prototype.afterPlayerMoved = function(x, y) {
-  if(Math.hypot(x-this.previousX, y-this.previousY) >= this.minStep) {
-    this.path.lineTo(x, y);
-    this.setPrevious(x, y);
+PlayerTrail.prototype.afterPlayerMoved = function(player) {
+  if(Math.hypot(player.x-this.previousX, player.y-this.previousY) >= this.minStep) {
+    this.path.lineTo(player.x, player.y);
+    this.setPrevious(player.x, player.y);
   }
 }
 
-PlayerTrail.prototype.afterPlayerWarped = function(x, y) {
-  this.beginObservingPlayer(x, y);
+PlayerTrail.prototype.afterPlayerWarped = function(player) {
+  this.path.moveTo(player.x, player.y);
+  this.setPrevious(player.x, player.y);
 }
 
 PlayerTrail.prototype.setPrevious = function(x, y) {
