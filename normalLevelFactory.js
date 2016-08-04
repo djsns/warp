@@ -5,6 +5,10 @@ const normalLevelFactory = {
     return this.factories[n].call(this);
   },
 
+  createLevelWithCustomPlayerPosition : function(n, customPlayerPosition) {
+    return this.factories[n].call(this, customPlayerPosition);
+  },
+
   createTypicalPlayer : function(x, y) {
     return Player({
       shape : Circle({
@@ -15,6 +19,12 @@ const normalLevelFactory = {
         filled : true,
       }),
     });
+  },
+
+  customizablyCreateTypicalPlayer : function(defaultX, defaultY, customPosition) {
+    if(customPosition)
+      return this.createTypicalPlayer(customPosition.x, customPosition.y);
+    else return this.createTypicalPlayer(defaultX, defaultY);
   },
 
   createTypicalPlayerTrail : function() {
@@ -61,23 +71,37 @@ const normalLevelFactory = {
     });
   },
 
+  createTypicalCheckpoint : function(x, y) {
+    return Checkpoint({
+      shape : Circle({
+        x : x,
+        y : y,
+        r : 20,
+      }),
+      activeStyle : '#FFFFFF',
+      achievedStyle : '#444444',
+    });
+  },
+
   factories : [
-    function() {
+    function(customPlayerPosition) {
       return Level({
-        player : this.createTypicalPlayer(300, 300),
+        player : this.customizablyCreateTypicalPlayer(300, 300, customPlayerPosition),
         playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
           this.createTypicalBounds(600, 600),
+          this.createTypicalCheckpoint(200, 300),
+          this.createTypicalCheckpoint(200, 400),
           this.createTypicalGoal(500, 500),
           this.createTypicalRectangleObstacle('fromCorner', 0, 0, 600, 200),
         ],
       });
     },
 
-    function() {
+    function(customPlayerPosition) {
       const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
-        player : this.createTypicalPlayer(60, 540),
+        player : this.customizablyCreateTypicalPlayer(60, 540, customPlayerPosition),
         playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
           this.createTypicalBounds(600, 600),
@@ -96,10 +120,11 @@ const normalLevelFactory = {
       });
     },
 
-    function() {
+    function(customPlayerPosition) {
       const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
         player : this.createTypicalPlayer(40, 30),
+        player : this.customizablyCreateTypicalPlayer(40, 30, customPlayerPosition),
         playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
           this.createTypicalBounds(600, 600),

@@ -57,18 +57,35 @@ Level.prototype.addResultListener = function(o) {
   this.resultListeners.push(o);
 }
 
+Level.prototype.registerRespawn = function(respawn) {
+  if(this.respawn)
+    this.respawn.reset();
+  this.respawn = respawn;
+}
+
 Level.prototype.win = function() {
-  this.finishWithResult(true);
+  this.finishWithOutcome(true);
 }
 
 Level.prototype.lose = function() {
-  this.finishWithResult(false);
+  this.finishWithOutcome(false);
 }
 
-Level.prototype.finishWithResult = function(result) {
+Level.prototype.finishWithOutcome = function(outcome) {
   if(this.isFinished)
     return;
+
   this.isFinished = true;
   this.player.stop();
+
+  const result = {won : outcome};
+  if(this.respawn) {
+    result.respawnPosition = {
+      x : this.respawn.getRespawnX(),
+      y : this.respawn.getRespawnY(),
+    };
+  }
+  Object.freeze(result);
+
   this.resultListeners.forEach(o => o(result));
 }

@@ -12,19 +12,32 @@ function Game(args) {
 Game.prototype.startCurrentLevel = function() {
   this.banner.reset();
 
-  const level = this.levelFactory.createLevelNumber(this.currentLevelNumber);
+  const level = this.createCurrentLevel();
   const controller = Controller(level.player, level);
 
   level.addResultListener(result => {
-    if(result)
+    if(result.won)
       this.banner.reportVictory();
     else this.banner.reportFailure();
+  });
+
+  level.addResultListener(result => {
+    this.previousAttemptResult = result;
   });
 
   level.startGameLoop(context);
 }
 
+Game.prototype.createCurrentLevel = function() {
+  if(this.previousAttemptResult && this.previousAttemptResult.respawnPosition) {
+    return this.levelFactory.createLevelWithCustomPlayerPosition(this.currentLevelNumber, this.previousAttemptResult.respawnPosition);
+  } else {
+    return this.levelFactory.createLevelNumber(this.currentLevelNumber);
+  }
+}
+
 Game.prototype.startNextLevel = function() {
   ++this.currentLevelNumber;
+  this.previousAttemptResult = null;
   this.startCurrentLevel();
 }
