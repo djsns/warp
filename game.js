@@ -15,11 +15,7 @@ Game.prototype.startCurrentLevel = function() {
   const level = this.createCurrentLevel();
   const controller = Controller(level.player, level);
 
-  level.addResultListener(result => {
-    if(result.won)
-      this.banner.reportVictory();
-    else this.banner.reportFailure();
-  });
+  this.banner.listenToLevel(level);
 
   level.addResultListener(result => {
     this.previousAttemptResult = result;

@@ -9,6 +9,14 @@ function Banner(args) {
   this.retry = args.retry;
 }
 
+Banner.prototype.listenToLevel = function(level) {
+  level.addResultListener(result => {
+    if(result.won)
+      this.reportVictory();
+    else this.reportFailure();
+  });
+}
+
 Banner.prototype.reportVictory = function() {
   this.printMessage('You won, next level:');
   this.hideElement(this.retry);
