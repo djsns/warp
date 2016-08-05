@@ -128,6 +128,9 @@ const normalLevelFactory = {
         gameplayObjects : [
           this.createTypicalBounds(600, 600),
           this.createTypicalGoal(560, 60),
+          this.createTypicalCheckpoint(250, 510),
+          this.createTypicalCheckpoint(210, 330),
+          this.createTypicalCheckpoint(290, 150),
           rectObstacle(0, 0, 20, 60, 'blue'),
           rectObstacle(0, 120, 20, 60, 'blue'),
           rectObstacle(40, 180, 20, 120, 'yellow'),
