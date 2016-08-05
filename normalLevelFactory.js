@@ -123,7 +123,6 @@ const normalLevelFactory = {
     function(customPlayerPosition) {
       const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
-        player : this.createTypicalPlayer(40, 30),
         player : this.customizablyCreateTypicalPlayer(40, 30, customPlayerPosition),
         playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
