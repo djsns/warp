@@ -54,3 +54,10 @@ Rectangle.prototype.touchesCircle = function(circle) {
   const distance = Math.hypot(circle.x-closestX, circle.y - closestY);
   return distance < circle.r;
 }
+
+Rectangle.prototype.containsCircle = function(circle) {
+  return this.x+circle.r <= circle.x &&
+         circle.x <= this.x+this.width-circle.r &&
+         this.y+circle.r <= circle.y &&
+         circle.y <= this.y+this.height-circle.r;
+}

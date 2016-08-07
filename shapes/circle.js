@@ -62,15 +62,8 @@ Circle.prototype.touchesCircle = function(otherCircle) {
   return distance <= radiusSum;
 }
 
-Circle.prototype.isContainedByCircle = function(otherCircle) {
+Circle.prototype.containsCircle = function(otherCircle) {
   const distance = Math.hypot(otherCircle.x-this.x, otherCircle.y-this.y);
-  const radiusDifference = otherCircle.r-this.r;
+  const radiusDifference = this.r-otherCircle.r;
   return distance <= radiusDifference;
-}
-
-Circle.prototype.isContainedByRectangle = function(rectangle) {
-  return rectangle.x+this.r <= this.x &&
-         this.x <= rectangle.x+rectangle.width-this.r &&
-         rectangle.y+this.r <= this.y &&
-         this.y <= rectangle.y+rectangle.height-this.r;
 }

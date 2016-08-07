@@ -13,5 +13,5 @@ Shape.prototype.touches = function(other) {
 }
 
 Shape.prototype.contains = function(other) {
-  return other['isContainedBy'+this.getShapeName()](this);
+  return this['contains'+other.getShapeName()](other);
 }
