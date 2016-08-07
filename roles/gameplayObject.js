@@ -5,10 +5,6 @@ function GameplayObject() {
     return new GameplayObject();
 }
 
-GameplayObject.prototype.setParentLevel = function(parentLevel) {
-  this.parentLevel = parentLevel;
-}
-
 GameplayObject.prototype.beginObservingPlayer = function(player) {
   player.addMovementObserver(this);
 }

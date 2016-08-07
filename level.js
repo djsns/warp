@@ -5,12 +5,12 @@ function Level(args) {
     return new Level(args);
 
   this.player = args.player;
+  this.player.setParentLevel(this);
   this.playerTrail = args.playerTrail;
   if(this.playerTrail)
     this.playerTrail.beginObservingPlayer(this.player);
   this.gameplayObjects = args.gameplayObjects;
   this.gameplayObjects.forEach(o => {
-    o.setParentLevel(this);
     o.beginObservingPlayer(this.player);
   });
   this.resultListeners = [];

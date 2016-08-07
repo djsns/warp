@@ -9,6 +9,6 @@ function Bounds(args) {
 
 Bounds.prototype = GameplayObject();
 
-Bounds.prototype.onPlayerNotInside = function() {
-  this.parentLevel.lose();
+Bounds.prototype.onPlayerNotInside = function(player) {
+  player.lose();
 }

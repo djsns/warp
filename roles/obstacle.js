@@ -9,6 +9,6 @@ function Obstacle(args) {
 
 Obstacle.prototype = GameplayObject();
 
-Obstacle.prototype.onPlayerTouch = function() {
-  this.parentLevel.lose();
+Obstacle.prototype.onPlayerTouch = function(player) {
+  player.lose();
 }

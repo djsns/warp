@@ -91,6 +91,22 @@ Player.prototype.addWarpObserver = function(o) {
   this.warpObservers.push(o);
 }
 
+Player.prototype.setParentLevel = function(parentLevel) {
+  this.parentLevel = parentLevel;
+}
+
+Player.prototype.win = function() {
+  this.parentLevel.win();
+}
+
+Player.prototype.lose = function() {
+  this.parentLevel.lose();
+}
+
+Player.prototype.registerRespawn = function(respawn) {
+  this.parentLevel.registerRespawn(respawn);
+}
+
 Player.prototype.stop = function() {
   this.vx = 0;
   this.vy = 0;

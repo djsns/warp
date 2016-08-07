@@ -9,6 +9,6 @@ function Goal(args) {
 
 Goal.prototype = GameplayObject();
 
-Goal.prototype.onPlayerInside = function() {
-  this.parentLevel.win();
+Goal.prototype.onPlayerInside = function(player) {
+  player.win();
 }

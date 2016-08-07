@@ -12,9 +12,9 @@ function Checkpoint(args) {
 
 Checkpoint.prototype = GameplayObject();
 
-Checkpoint.prototype.onPlayerInside = function() {
+Checkpoint.prototype.onPlayerInside = function(player) {
   if(this.isActive) {
-    this.parentLevel.registerRespawn(this);
+    player.registerRespawn(this);
     this.markAsAchieved();
   }
 }
