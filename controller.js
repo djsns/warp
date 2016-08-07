@@ -8,7 +8,6 @@ function Controller(player, level) {
   this.level = level;
   this.keyActions = {
     keydown : {
-      17 : () => {this.player && this.player.saveGhost()},
       37 : () => {this.player && this.player.nudgeLeft()},
       65 : () => {this.player && this.player.nudgeLeft()},
       38 : () => {this.player && this.player.nudgeUp()},
@@ -17,10 +16,6 @@ function Controller(player, level) {
       68 : () => {this.player && this.player.nudgeRight()},
       40 : () => {this.player && this.player.nudgeDown()},
       83 : () => {this.player && this.player.nudgeDown()},
-    },
-
-    keyup : {
-      17 : () => {this.player && this.player.ghostWarp()},
     },
   };
 

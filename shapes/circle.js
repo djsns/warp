@@ -29,12 +29,6 @@ Circle.prototype.setCenterY = function(y) {
   this.y = y;
 }
 
-Circle.prototype.createOutline = function() {
-  const outline = Object.assign(Object.create(this.__proto__), this);
-  outline.filled = false;
-  return outline;
-}
-
 Circle.prototype.draw = function(context) {
   if(this.filled)
     this.drawFilled(context);

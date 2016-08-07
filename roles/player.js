@@ -15,7 +15,6 @@ function Player(args) {
   this.warpObservers = [];
   this.speedWarpDistance = 100;
   this.speedWarpsEnabled = true;
-  this.ghostShape = null;
 }
 
 Object.defineProperty(Player.prototype, 'x', {
@@ -36,20 +35,6 @@ Object.defineProperty(Player.prototype, 'y', {
   }
 });
 
-Player.prototype.saveGhost = function() {
-  if(!this.ghostShape)
-    this.ghostShape = this.shape.createOutline();
-}
-
-Player.prototype.ghostWarp = function() {
-  if(this.ghostShape) {
-    this.shape.setCenterX(this.ghostShape.getCenterX());
-    this.shape.setCenterY(this.ghostShape.getCenterY());
-    this.ghostShape = null;
-    this.notifyObserversAboutWarp();
-  }
-}
-
 Player.prototype.notifyObserversAboutWarp = function() {
   this.warpObservers.forEach(o => o.afterPlayerWarped(this));
 }
@@ -60,8 +45,6 @@ Player.prototype.notifyObserversAboutMovement = function() {
 
 Player.prototype.draw = function(context) {
   this.shape.draw(context);
-  if(this.ghostShape)
-    this.ghostShape.draw(context);
 }
 
 Player.prototype.update = function(dt) {
