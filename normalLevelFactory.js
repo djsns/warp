@@ -73,29 +73,40 @@ const normalLevelFactory = {
     });
   },
 
+  createTypicalKeyGuide : function(x, y) {
+    return KeyGuide({
+      wasdRadius : 40,
+      arrowRadius : 70,
+      fontFamily : 'mono',
+      fontSize : 32,
+      shape : Circle({
+        x : x,
+        y : y,
+        r : 50,
+      }),
+    });
+  },
+
   factories : [
     function(respawnInfo) {
+      const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
         respawnInfo : respawnInfo,
-        player : this.createTypicalPlayer(300, 300),
+        player : this.createTypicalPlayer(200, 200),
         gameplayObjects : [
           this.createTypicalPlayerTrail(),
-          KeyGuide({
-            wasdRadius : 40,
-            arrowRadius : 70,
-            fontFamily : 'mono',
-            fontSize : 32,
-            shape : Circle({
-              x : 300,
-              y : 300,
-              r : 50,
-            }),
-          }),
+          this.createTypicalKeyGuide(200, 200),
           this.createTypicalBounds(600, 600),
-          this.createTypicalCheckpoint(200, 300),
-          this.createTypicalCheckpoint(200, 400),
-          this.createTypicalGoal(500, 500),
-          this.createTypicalRectangleObstacle('fromCorner', 0, 0, 600, 200),
+          this.createTypicalCheckpoint(250, 450),
+          this.createTypicalGoal(450, 150),
+          rectObstacle(0, 0, 100, 600, 'blue'),
+          rectObstacle(500, 0, 100, 600, 'red'),
+          rectObstacle(0, 0, 600, 100, 'green'),
+          rectObstacle(0, 500, 600, 100, 'orange'),
+          rectObstacle(300, 100, 100, 300, 'brown'),
+          rectObstacle(100, 350, 200, 50, 'navy'),
+          rectObstacle(400, 200, 100, 50, 'navy'),
+          rectObstacle(350, 400, 50, 100, 'yellow'),
         ],
       });
     },
