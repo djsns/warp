@@ -140,11 +140,11 @@ const normalLevelFactory = {
       const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
         respawnInfo : respawnInfo,
-        player : this.createTypicalPlayer(60, 30),
+        player : this.createTypicalPlayer(80, 30),
         gameplayObjects : [
           this.createTypicalPlayerTrail(),
           this.createTypicalBounds(600, 600),
-          this.createTypicalCheckpoint(60, 30),
+          this.createTypicalCheckpoint(80, 30),
           this.createTypicalCheckpoint(250, 510),
           this.createTypicalCheckpoint(210, 330),
           this.createTypicalCheckpoint(290, 150),
@@ -178,7 +178,8 @@ const normalLevelFactory = {
           rectObstacle(340, 120, 60, 60, 'skyblue'),
           rectObstacle(300, 180, 60, 60, 'skyblue'),
           rectObstacle(520, 480, 40, 60, 'green'),
-          rectObstacle(60, 60, 60, 180, 'white'),
+          rectObstacle(60, 60, 40, 60, 'pink'),
+          rectObstacle(60, 120, 60, 120, 'white'),
           rectObstacle(160, 0, 40, 180, 'orange'),
           rectObstacle(240, 0, 40, 120, 'orange'),
           rectObstacle(340, 0, 40, 60, 'orange'),

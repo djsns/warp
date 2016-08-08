@@ -10,7 +10,6 @@ function KeyGuide(args) {
   this.fontFamily = args.fontFamily;
   this.fontSize = args.fontSize;
   this.visible = true;
-  console.dir(this);
 }
 
 KeyGuide.prototype = GameplayObject();
