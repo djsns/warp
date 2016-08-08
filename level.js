@@ -6,9 +6,6 @@ function Level(args) {
 
   this.player = args.player;
   this.player.setParentLevel(this);
-  this.playerTrail = args.playerTrail;
-  if(this.playerTrail)
-    this.playerTrail.beginObservingPlayer(this.player);
   this.gameplayObjects = args.gameplayObjects;
   this.gameplayObjects.forEach(o => {
     o.beginObservingPlayer(this.player);
@@ -20,7 +17,6 @@ function Level(args) {
 
 Level.prototype.draw = function(context) {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-  this.playerTrail.draw(context);
   this.gameplayObjects.forEach(o => o.draw(context));
   this.player.draw(context);
 }

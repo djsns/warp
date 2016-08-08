@@ -87,8 +87,8 @@ const normalLevelFactory = {
     function(customPlayerPosition) {
       return Level({
         player : this.customizablyCreateTypicalPlayer(300, 300, customPlayerPosition),
-        playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
+          this.createTypicalPlayerTrail(),
           this.createTypicalBounds(600, 600),
           this.createTypicalCheckpoint(200, 300),
           this.createTypicalCheckpoint(200, 400),
@@ -102,8 +102,8 @@ const normalLevelFactory = {
       const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
         player : this.customizablyCreateTypicalPlayer(60, 540, customPlayerPosition),
-        playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
+          this.createTypicalPlayerTrail(),
           this.createTypicalBounds(600, 600),
           this.createTypicalGoal(525, 60),
           rectObstacle(75, 0, 70, 120),
@@ -124,8 +124,8 @@ const normalLevelFactory = {
       const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
         player : this.customizablyCreateTypicalPlayer(40, 30, customPlayerPosition),
-        playerTrail : this.createTypicalPlayerTrail(),
         gameplayObjects : [
+          this.createTypicalPlayerTrail(),
           this.createTypicalBounds(600, 600),
           this.createTypicalGoal(560, 60),
           this.createTypicalCheckpoint(250, 510),
