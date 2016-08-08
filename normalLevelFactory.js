@@ -80,6 +80,17 @@ const normalLevelFactory = {
         player : this.createTypicalPlayer(300, 300),
         gameplayObjects : [
           this.createTypicalPlayerTrail(),
+          KeyGuide({
+            wasdRadius : 40,
+            arrowRadius : 70,
+            fontFamily : 'mono',
+            fontSize : 32,
+            shape : Circle({
+              x : 300,
+              y : 300,
+              r : 50,
+            }),
+          }),
           this.createTypicalBounds(600, 600),
           this.createTypicalCheckpoint(200, 300),
           this.createTypicalCheckpoint(200, 400),
