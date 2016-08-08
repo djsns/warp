@@ -104,7 +104,27 @@ Player.prototype.lose = function() {
 }
 
 Player.prototype.registerRespawn = function(respawn) {
-  this.parentLevel.registerRespawn(respawn);
+  if(this.respawn)
+    this.respawn.reset();
+  this.respawn = respawn;
+}
+
+Player.prototype.generateRespawnInfo = function() {
+  if(this.respawn) {
+    return {
+      respawnX : this.respawn.getRespawnX(),
+      respawnY : this.respawn.getRespawnY(),
+    };
+  } else {
+    return null;
+  }
+}
+
+Player.prototype.handleRespawnInfo = function(respawnInfo) {
+  if(respawnInfo) {
+    this.x = respawnInfo.respawnX;
+    this.y = respawnInfo.respawnY;
+  }
 }
 
 Player.prototype.stop = function() {

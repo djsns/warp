@@ -5,14 +5,15 @@ function Level(args) {
     return new Level(args);
 
   this.player = args.player;
-  this.player.setParentLevel(this);
   this.gameplayObjects = args.gameplayObjects;
-  this.gameplayObjects.forEach(o => {
-    o.beginObservingPlayer(this.player);
-  });
-  this.resultListeners = [];
+  this.outcomeListeners = [];
+  this.respawnInfoListeners = [];
   this.isPaused = true;
   this.isFinished = false;
+
+  this.handleRespawnInfo(args.respawnInfo);
+  this.player.setParentLevel(this);
+  this.gameplayObjects.forEach(o => o.beginObservingPlayer(this.player));
 }
 
 Level.prototype.draw = function(context) {
@@ -49,14 +50,20 @@ Level.prototype.pauseGameLoop = function() {
   this.isPaused = true;
 }
 
-Level.prototype.addResultListener = function(o) {
-  this.resultListeners.push(o);
+Level.prototype.addOutcomeListener = function(listener) {
+  this.outcomeListeners.push(listener);
 }
 
-Level.prototype.registerRespawn = function(respawn) {
-  if(this.respawn)
-    this.respawn.reset();
-  this.respawn = respawn;
+Level.prototype.addRespawnInfoListener = function(listener) {
+  this.respawnInfoListeners.push(listener);
+}
+
+Level.prototype.generateRespawnInfo = function() {
+  return this.player.generateRespawnInfo();
+}
+
+Level.prototype.handleRespawnInfo = function(respawnInfo) {
+  this.player.handleRespawnInfo(respawnInfo);
 }
 
 Level.prototype.win = function() {
@@ -74,14 +81,11 @@ Level.prototype.finishWithOutcome = function(outcome) {
   this.isFinished = true;
   this.player.stop();
 
-  const result = {won : outcome};
-  if(this.respawn) {
-    result.respawnPosition = {
-      x : this.respawn.getRespawnX(),
-      y : this.respawn.getRespawnY(),
-    };
-  }
-  Object.freeze(result);
+  this.outcomeListeners.forEach(listener => listener(outcome));
 
-  this.resultListeners.forEach(o => o(result));
+  if(!outcome) {
+    const respawnInfo = this.generateRespawnInfo();
+    Object.freeze(respawnInfo);
+    this.respawnInfoListeners.forEach(listener => listener(respawnInfo));
+  }
 }

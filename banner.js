@@ -10,8 +10,8 @@ function Banner(args) {
 }
 
 Banner.prototype.listenToLevel = function(level) {
-  level.addResultListener(result => {
-    if(result.won)
+  level.addOutcomeListener(outcome => {
+    if(outcome)
       this.reportVictory();
     else this.reportFailure();
   });

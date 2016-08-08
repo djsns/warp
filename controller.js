@@ -43,5 +43,5 @@ function Controller(player, level) {
     this.level = null;
   }
 
-  this.level.addResultListener(this.detach);
+  this.level.addOutcomeListener(this.detach);
 }

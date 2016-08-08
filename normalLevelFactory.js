@@ -1,12 +1,8 @@
 'use strict';
 
 const normalLevelFactory = {
-  createLevelNumber : function(n) {
-    return this.factories[n].call(this);
-  },
-
-  createLevelWithCustomPlayerPosition : function(n, customPlayerPosition) {
-    return this.factories[n].call(this, customPlayerPosition);
+  createLevelNumber : function(n, respawnInfo) {
+    return this.factories[n].call(this, respawnInfo);
   },
 
   createTypicalPlayer : function(x, y) {
@@ -19,12 +15,6 @@ const normalLevelFactory = {
         filled : true,
       }),
     });
-  },
-
-  customizablyCreateTypicalPlayer : function(defaultX, defaultY, customPosition) {
-    if(customPosition)
-      return this.createTypicalPlayer(customPosition.x, customPosition.y);
-    else return this.createTypicalPlayer(defaultX, defaultY);
   },
 
   createTypicalPlayerTrail : function() {
@@ -84,9 +74,10 @@ const normalLevelFactory = {
   },
 
   factories : [
-    function(customPlayerPosition) {
+    function(respawnInfo) {
       return Level({
-        player : this.customizablyCreateTypicalPlayer(300, 300, customPlayerPosition),
+        respawnInfo : respawnInfo,
+        player : this.createTypicalPlayer(300, 300),
         gameplayObjects : [
           this.createTypicalPlayerTrail(),
           this.createTypicalBounds(600, 600),
@@ -98,10 +89,11 @@ const normalLevelFactory = {
       });
     },
 
-    function(customPlayerPosition) {
+    function(respawnInfo) {
       const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
-        player : this.customizablyCreateTypicalPlayer(60, 540, customPlayerPosition),
+        respawnInfo : respawnInfo,
+        player : this.createTypicalPlayer(60, 540),
         gameplayObjects : [
           this.createTypicalPlayerTrail(),
           this.createTypicalBounds(600, 600),
@@ -120,10 +112,11 @@ const normalLevelFactory = {
       });
     },
 
-    function(customPlayerPosition) {
+    function(respawnInfo) {
       const rectObstacle = this.createTypicalRectangleObstacle.bind(this, 'fromCorner');
       return Level({
-        player : this.customizablyCreateTypicalPlayer(40, 30, customPlayerPosition),
+        respawnInfo : respawnInfo,
+        player : this.createTypicalPlayer(40, 30),
         gameplayObjects : [
           this.createTypicalPlayerTrail(),
           this.createTypicalBounds(600, 600),

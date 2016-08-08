@@ -17,23 +17,19 @@ Game.prototype.startCurrentLevel = function() {
 
   this.banner.listenToLevel(level);
 
-  level.addResultListener(result => {
-    this.previousAttemptResult = result;
+  level.addRespawnInfoListener(respawnInfo => {
+    this.respawnInfo = respawnInfo;
   });
 
   level.startGameLoop(context);
 }
 
 Game.prototype.createCurrentLevel = function() {
-  if(this.previousAttemptResult && this.previousAttemptResult.respawnPosition) {
-    return this.levelFactory.createLevelWithCustomPlayerPosition(this.currentLevelNumber, this.previousAttemptResult.respawnPosition);
-  } else {
-    return this.levelFactory.createLevelNumber(this.currentLevelNumber);
-  }
+  return this.levelFactory.createLevelNumber(this.currentLevelNumber, this.respawnInfo);
 }
 
 Game.prototype.startNextLevel = function() {
   ++this.currentLevelNumber;
-  this.previousAttemptResult = null;
+  this.respawnInfo = null;
   this.startCurrentLevel();
 }
