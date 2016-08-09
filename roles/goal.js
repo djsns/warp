@@ -12,3 +12,7 @@ Goal.prototype = GameplayObject();
 Goal.prototype.onPlayerInside = function(player) {
   player.win();
 }
+
+Goal.prototype.isStatic = function() {
+  return true;
+}

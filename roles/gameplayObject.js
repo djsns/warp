@@ -23,3 +23,11 @@ GameplayObject.prototype.afterPlayerMoved = function(player) {
   if(touchesPlayer && this.onPlayerTouch)
     this.onPlayerTouch(player);
 }
+
+GameplayObject.prototype.isStatic = function() {
+  return false;
+}
+
+GameplayObject.prototype.isBackground = function() {
+  return false;
+}

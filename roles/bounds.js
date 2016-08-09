@@ -12,3 +12,7 @@ Bounds.prototype = GameplayObject();
 Bounds.prototype.onPlayerNotInside = function(player) {
   player.lose();
 }
+
+Bounds.prototype.isStatic = function() {
+  return true;
+}

@@ -5,20 +5,39 @@ function Level(args) {
     return new Level(args);
 
   this.player = args.player;
-  this.gameplayObjects = args.gameplayObjects;
   this.outcomeListeners = [];
   this.respawnInfoListeners = [];
   this.isPaused = true;
   this.isFinished = false;
+
+  this.gameplayObjects = args.gameplayObjects;
+  this.gameplayObjects.sort((a,b) => b.isBackground() - a.isBackground());
+  this.staticGameplayObjects = [];
+  this.dynamicGameplayObjects = [];
+  args.gameplayObjects.forEach(o => {
+    if(o.isStatic())
+      this.staticGameplayObjects.push(o);
+    else this.dynamicGameplayObjects.push(o);
+  });
 
   this.handleRespawnInfo(args.respawnInfo);
   this.player.setParentLevel(this);
   this.gameplayObjects.forEach(o => o.beginObservingPlayer(this.player));
 }
 
+Level.prototype.prerenderStaticObjects = function(templateContext) {
+  this.prerenderCanvas = document.createElement('canvas');
+  this.prerenderCanvas.width = templateContext.canvas.width;
+  this.prerenderCanvas.height = templateContext.canvas.height;
+  const prerenderContext = this.prerenderCanvas.getContext('2d');
+  this.staticGameplayObjects.forEach(o => o.draw(prerenderContext));
+}
+
 Level.prototype.draw = function(context) {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-  this.gameplayObjects.forEach(o => o.draw(context));
+  if(this.prerenderCanvas)
+    context.drawImage(this.prerenderCanvas, 0, 0);
+  this.dynamicGameplayObjects.forEach(o => o.draw(context));
   this.player.draw(context);
 }
 

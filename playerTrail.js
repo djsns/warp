@@ -41,3 +41,7 @@ PlayerTrail.prototype.setPrevious = function(x, y) {
   this.previousX = x;
   this.previousY = y;
 }
+
+PlayerTrail.prototype.isBackground = function() {
+  return true;
+}

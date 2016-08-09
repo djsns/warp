@@ -12,3 +12,7 @@ Obstacle.prototype = GameplayObject();
 Obstacle.prototype.onPlayerTouch = function(player) {
   player.lose();
 }
+
+Obstacle.prototype.isStatic = function() {
+  return true;
+}
