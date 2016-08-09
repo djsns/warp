@@ -25,8 +25,7 @@ h1 {
   text-decoration: none;
   outline: none;
   color: aquamarine;
-  font-size: 150%;
-  vertical-align: middle;
+  font-size: 1.5em;
 }
 .hidden {
   display: none;
