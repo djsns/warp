@@ -13,7 +13,10 @@
       <a id='gameNext' class='hidden' href='#'>==&gt;</a>
       <a id='gameRetry' class='hidden' href='#'>&lt;==</a>
     </h1>
-    <canvas id='gameCanvas' width='600' height='600'></canvas>
+    <div class="layerGroup">
+      <canvas id='gameBackgroundCanvas' width='600' height='600'></canvas>
+      <canvas id='gameCanvas' width='600' height='600'></canvas>
+    </div>
   </main>
   <script src='mathUtils.js'></script>
   <script src='controller.js'></script>

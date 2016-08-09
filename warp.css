@@ -8,8 +8,17 @@ main {
   margin: 0 auto;
   display: inline-block;
 }
-#gameCanvas {
+.layerGroup {
+  background-color: red;
+  position: relative;
+}
+.layerGroup > *:first-child {
   background-color: black;
+}
+.layerGroup > *:not(:first-child) {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 h1 {
   margin: 0.5em 0;

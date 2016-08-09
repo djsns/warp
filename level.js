@@ -25,18 +25,14 @@ function Level(args) {
   this.gameplayObjects.forEach(o => o.beginObservingPlayer(this.player));
 }
 
-Level.prototype.prerenderStaticObjects = function(templateContext) {
-  this.prerenderCanvas = document.createElement('canvas');
-  this.prerenderCanvas.width = templateContext.canvas.width;
-  this.prerenderCanvas.height = templateContext.canvas.height;
-  const prerenderContext = this.prerenderCanvas.getContext('2d');
+Level.prototype.prerenderStaticObjects = function(prerenderContext) {
+  prerenderContext.clearRect(0, 0, prerenderContext.canvas.width,
+                             prerenderContext.canvas.height);
   this.staticGameplayObjects.forEach(o => o.draw(prerenderContext));
 }
 
 Level.prototype.draw = function(context) {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-  if(this.prerenderCanvas)
-    context.drawImage(this.prerenderCanvas, 0, 0);
   this.dynamicGameplayObjects.forEach(o => o.draw(context));
   this.player.draw(context);
 }

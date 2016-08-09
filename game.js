@@ -13,7 +13,7 @@ Game.prototype.startCurrentLevel = function() {
   this.banner.reset();
 
   const level = this.createCurrentLevel();
-  level.prerenderStaticObjects(context);
+  level.prerenderStaticObjects(prerenderContext);
   const controller = Controller(level.player, level);
 
   this.banner.listenToLevel(level);
