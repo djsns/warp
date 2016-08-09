@@ -10,6 +10,8 @@ function PlayerTrail(args) {
   this.style = args.style;
 }
 
+PlayerTrail.prototype = GameplayObject();
+
 PlayerTrail.prototype.draw = function(context) {
   context.strokeStyle = this.style;
   context.lineWidth = this.lineWidth;
