@@ -79,6 +79,7 @@ Level.prototype.finishWithOutcome = function(outcome) {
     return;
 
   this.isFinished = true;
+  this.pauseGameLoop();
   this.player.stop();
 
   this.outcomeListeners.forEach(listener => listener(outcome));
