@@ -1,12 +1,14 @@
 'use strict';
 
 const normalLevelFactory = {
-  createLevelNumber : function(n, respawnInfo) {
+  createLevelNumber : function(n, audioContext, respawnInfo) {
     const levelArgs = this.levelArgFactories[n].call(this);
     levelArgs.respawnInfo = respawnInfo;
     const startCheckpoint =
       this.createTypicalCheckpoint(levelArgs.player.x, levelArgs.player.y);
     levelArgs.gameplayObjects.push(startCheckpoint);
+    const playerSoundEmitter = this.createTypicalPlayerSoundEmitter(audioContext);
+    levelArgs.gameplayObjects.push(playerSoundEmitter);
     return Level(levelArgs);
   },
 
@@ -89,6 +91,12 @@ const normalLevelFactory = {
         y : y,
         r : 50,
       }),
+    });
+  },
+
+  createTypicalPlayerSoundEmitter : function(audioContext) {
+    return PlayerSoundEmitter({
+      audioContext : audioContext,
     });
   },
 

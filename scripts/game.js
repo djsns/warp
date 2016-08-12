@@ -7,6 +7,7 @@ function Game(args) {
   this.banner = args.banner;
   this.levelFactory = args.levelFactory;
   this.currentLevelNumber = 0;
+  this.audioContext = new (window.AudioContext || window.webkitAudioContext);
 }
 
 Game.prototype.startCurrentLevel = function() {
@@ -25,7 +26,8 @@ Game.prototype.startCurrentLevel = function() {
 }
 
 Game.prototype.createCurrentLevel = function() {
-  return this.levelFactory.createLevelNumber(this.currentLevelNumber, this.respawnInfo);
+  return this.levelFactory.createLevelNumber(this.currentLevelNumber, this.audioContext,
+                                             this.respawnInfo);
 }
 
 Game.prototype.startNextLevel = function() {
