@@ -5,6 +5,15 @@ function PlayerSoundEmitter(args) {
     return new PlayerSoundEmitter(args);
 
   this.audioContext = args.audioContext;
+
+  this.startAudioElement = args.startAudioElement;
+  this.startAudioNode = this.audioContext.createMediaElementSource(this.startAudioElement);
+  this.startAudioNode.connect(this.audioContext.destination);
+
+  this.warpAudioElement = args.warpAudioElement;
+  this.warpAudioNode = this.audioContext.createMediaElementSource(this.warpAudioElement);
+  this.warpAudioNode.connect(this.audioContext.destination);
+
   this.playedStartSound = false;
 }
 
@@ -19,11 +28,11 @@ PlayerSoundEmitter.prototype.beginObservingPlayer = function(player) {
 
 PlayerSoundEmitter.prototype.afterPlayerMoved = function(player) {
   if(!this.playedStartSound) {
-    alert('*start sound*');
+    this.startAudioElement.play();
     this.playedStartSound = true;
   }
 }
 
 PlayerSoundEmitter.prototype.afterPlayerWarped = function(player) {
-  alert('*warp sound*');
+  this.warpAudioElement.play();
 }

@@ -97,6 +97,8 @@ const normalLevelFactory = {
   createTypicalPlayerSoundEmitter : function(audioContext) {
     return PlayerSoundEmitter({
       audioContext : audioContext,
+      startAudioElement : document.getElementById('startSound'),
+      warpAudioElement : document.getElementById('warpSound'),
     });
   },
 
