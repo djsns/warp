@@ -26,13 +26,13 @@ PlayerSoundEmitter.prototype.beginObservingPlayer = function(player) {
   player.addWarpObserver(this);
 }
 
-PlayerSoundEmitter.prototype.afterPlayerMoved = function(player) {
+PlayerSoundEmitter.prototype.afterPlayerMoved = function() {
   if(!this.playedStartSound) {
     this.startAudioElement.play();
     this.playedStartSound = true;
   }
 }
 
-PlayerSoundEmitter.prototype.afterPlayerWarped = function(player) {
+PlayerSoundEmitter.prototype.afterPlayerWarped = function() {
   this.warpAudioElement.play();
 }
