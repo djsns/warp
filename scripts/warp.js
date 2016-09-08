@@ -8,7 +8,7 @@ const game = Game({
     next : document.getElementById('gameNext'),
     retry : document.getElementById('gameRetry'),
   }),
-  levelFactory : normalLevelFactory,
+  levelFactory : NormalLevelFactory(),
 })
 
 document.getElementById('gameNext').addEventListener('click', () =>
