@@ -1,18 +1,38 @@
 'use strict';
 
-function NormalLevelFactory() {
+function NormalLevelFactory(audioContext) {
   if(!(this instanceof NormalLevelFactory))
-    return new NormalLevelFactory();
+    return new NormalLevelFactory(audioContext);
   this.isDuringDevelopment = false;
+  this.audioContext = audioContext;
 }
 
-NormalLevelFactory.prototype.createLevelNumber = function(n, audioContext, respawnInfo) {
+NormalLevelFactory.prototype.loadBuffers = function() {
+  return Promise.all([this.loadAudioBuffer('sounds/lunardrive_drip.wav'),
+                      this.loadAudioBuffer('sounds/univ-lyon3_cannet.wav')]).then(buffers => {
+    this.startAudioBuffer = buffers[0];
+    this.warpAudioBuffer = buffers[1];
+  });
+}
+
+NormalLevelFactory.prototype.loadAudioBuffer = function(bufferPath) {
+  return new Promise((fulfill, reject) => {
+    const request = new XMLHttpRequest;
+    request.open('GET', bufferPath);
+    request.responseType = 'arraybuffer';
+    request.onload = () => fulfill(this.audioContext.decodeAudioData(request.response));
+    request.onerror = () => reject(Error('status: '+request.status));
+    request.send();
+  });
+}
+
+NormalLevelFactory.prototype.createLevelNumber = function(n, respawnInfo) {
   const levelArgs = NormalLevelFactory.levelArgFactories[n].call(this);
   levelArgs.respawnInfo = respawnInfo;
   const startCheckpoint =
     this.createTypicalCheckpoint(levelArgs.player.x, levelArgs.player.y);
   levelArgs.gameplayObjects.push(startCheckpoint);
-  const playerSoundEmitter = this.createTypicalPlayerSoundEmitter(audioContext);
+  const playerSoundEmitter = this.createTypicalPlayerSoundEmitter();
   levelArgs.gameplayObjects.push(playerSoundEmitter);
   return Level(levelArgs);
 }
@@ -100,11 +120,11 @@ NormalLevelFactory.prototype.createTypicalKeyGuide = function(x, y) {
   });
 }
 
-NormalLevelFactory.prototype.createTypicalPlayerSoundEmitter = function(audioContext) {
+NormalLevelFactory.prototype.createTypicalPlayerSoundEmitter = function() {
   return PlayerSoundEmitter({
-    audioContext : audioContext,
-    startAudioElement : document.getElementById('startSound'),
-    warpAudioElement : document.getElementById('warpSound'),
+    audioContext : this.audioContext,
+    startAudioBuffer : this.startAudioBuffer,
+    warpAudioBuffer : this.warpAudioBuffer,
   });
 }
 

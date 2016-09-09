@@ -5,15 +5,8 @@ function PlayerSoundEmitter(args) {
     return new PlayerSoundEmitter(args);
 
   this.audioContext = args.audioContext;
-
-  this.startAudioElement = args.startAudioElement;
-  this.startAudioNode = this.audioContext.createMediaElementSource(this.startAudioElement);
-  this.startAudioNode.connect(this.audioContext.destination);
-
-  this.warpAudioElement = args.warpAudioElement;
-  this.warpAudioNode = this.audioContext.createMediaElementSource(this.warpAudioElement);
-  this.warpAudioNode.connect(this.audioContext.destination);
-
+  this.startAudioBuffer = args.startAudioBuffer;
+  this.warpAudioBuffer = args.warpAudioBuffer;
   this.playedStartSound = false;
 }
 
@@ -28,11 +21,25 @@ PlayerSoundEmitter.prototype.beginObservingPlayer = function(player) {
 
 PlayerSoundEmitter.prototype.afterPlayerMoved = function() {
   if(!this.playedStartSound) {
-    this.startAudioElement.play();
+    this.playStartSound();
     this.playedStartSound = true;
   }
 }
 
 PlayerSoundEmitter.prototype.afterPlayerWarped = function() {
-  this.warpAudioElement.play();
+  this.playWarpSound();
+}
+
+PlayerSoundEmitter.prototype.playStartSound = function(soundName) {
+  const startSoundNode = this.audioContext.createBufferSource();
+  startSoundNode.buffer = this.startAudioBuffer;
+  startSoundNode.connect(this.audioContext.destination);
+  startSoundNode.start();
+}
+
+PlayerSoundEmitter.prototype.playWarpSound = function(soundName) {
+  const warpSoundNode = this.audioContext.createBufferSource();
+  warpSoundNode.buffer = this.warpAudioBuffer;
+  warpSoundNode.connect(this.audioContext.destination);
+  warpSoundNode.start();
 }
