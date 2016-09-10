@@ -4,21 +4,19 @@ const context = document.getElementById('gameCanvas').getContext('2d');
 {
   const audioContext = new (window.AudioContext || window.webkitAudioContext);
   const levelFactory = NormalLevelFactory(audioContext);
-  levelFactory.loadBuffers().then(() => {
-    const game = Game({
-      banner : Banner({
-        message : document.getElementById('gameMessage'),
-        next : document.getElementById('gameNext'),
-        retry : document.getElementById('gameRetry'),
-      }),
-      levelFactory : levelFactory,
-    });
+  const game = Game({
+    banner : Banner({
+      message : document.getElementById('gameMessage'),
+      next : document.getElementById('gameNext'),
+      retry : document.getElementById('gameRetry'),
+    }),
+    levelFactory : levelFactory,
+  });
 
-    document.getElementById('gameNext').addEventListener('click', () =>
-      game.startNextLevel());
-    document.getElementById('gameRetry').addEventListener('click', () =>
-      game.startCurrentLevel());
+  document.getElementById('gameNext').addEventListener('click', () =>
+    game.startNextLevel());
+  document.getElementById('gameRetry').addEventListener('click', () =>
+    game.startCurrentLevel());
 
-    game.startCurrentLevel();
-  }).catch(err => console.error(err));
+  game.startCurrentLevel();
 }
