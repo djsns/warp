@@ -40,6 +40,7 @@ PlayerSoundEmitter.prototype.playStartSound = function(soundName) {
 PlayerSoundEmitter.prototype.playWarpSound = function(soundName) {
   const warpSoundNode = this.audioContext.createBufferSource();
   warpSoundNode.buffer = this.warpAudioBuffer;
+  warpSoundNode.detune.value = Math.random()*400 - 100;
   warpSoundNode.connect(this.audioContext.destination);
   warpSoundNode.start();
 }
