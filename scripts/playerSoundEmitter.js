@@ -30,7 +30,7 @@ PlayerSoundEmitter.prototype.afterPlayerWarped = function() {
   this.playWarpSound();
 }
 
-PlayerSoundEmitter.prototype.playStartSound = function(soundName) {
+PlayerSoundEmitter.prototype.playStartSound = function() {
   return this.startAudioBufferPromise.then(startAudioBuffer => {
     const startSoundNode = this.audioContext.createBufferSource();
     startSoundNode.buffer = startAudioBuffer;
@@ -39,7 +39,7 @@ PlayerSoundEmitter.prototype.playStartSound = function(soundName) {
   });
 }
 
-PlayerSoundEmitter.prototype.playWarpSound = function(soundName) {
+PlayerSoundEmitter.prototype.playWarpSound = function() {
   return this.warpAudioBufferPromise.then(warpAudioBuffer => {
     const warpSoundNode = this.audioContext.createBufferSource();
     warpSoundNode.buffer = warpAudioBuffer;
