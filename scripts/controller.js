@@ -20,7 +20,7 @@ function Controller(player, level) {
   this.handleVisibilityChange = () => {
     if(document.hidden)
       this.level && this.level.pauseGameLoop();
-    else this.level && this.level.startGameLoop(context);
+    else this.level && this.level.startGameLoop();
   };
 
   this.handleKeyDown = event => {

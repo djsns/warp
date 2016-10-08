@@ -4,6 +4,7 @@ function Level(args) {
   if(!(this instanceof Level))
     return new Level(args);
 
+  this.context = args.context;
   this.player = args.player;
   this.gameplayObjects = args.gameplayObjects;
   this.outcomeListeners = [];
@@ -16,26 +17,26 @@ function Level(args) {
   this.gameplayObjects.forEach(o => o.beginObservingPlayer(this.player));
 }
 
-Level.prototype.draw = function(context) {
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-  this.gameplayObjects.forEach(o => o.draw(context));
-  this.player.draw(context);
+Level.prototype.draw = function() {
+  this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+  this.gameplayObjects.forEach(o => o.draw(this.context));
+  this.player.draw(this.context);
 }
 
 Level.prototype.update = function(dt) {
   this.player.update(dt);
 }
 
-Level.prototype.frame = function(context, dt) {
+Level.prototype.frame = function(dt) {
   this.update(dt);
-  this.draw(context);
+  this.draw();
 }
 
-Level.prototype.startGameLoop = function(context) {
+Level.prototype.startGameLoop = function() {
   const gameLoopFrame = now => {
     if(!this.isPaused) {
       const dt = now - this.lastFrameTime;
-      this.frame(context, dt);
+      this.frame(dt);
       window.requestAnimationFrame(gameLoopFrame);
     }
     this.lastFrameTime = now;
