@@ -44,9 +44,9 @@ Banner.prototype.printMessage = function(message) {
 }
 
 Banner.prototype.showElement = function(element) {
-  element.classList.remove('hidden');
+  element.hidden = false;
 }
 
 Banner.prototype.hideElement = function(element) {
-  element.classList.add('hidden');
+  element.hidden = true;
 }
