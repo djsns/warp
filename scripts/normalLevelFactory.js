@@ -37,7 +37,7 @@ NormalLevelFactory.prototype.createTypicalPlayer = function(x, y) {
       x : x,
       y : y,
       r : 10,
-      style : '#FFFFFF',
+      style : '#FFF',
       filled : true,
     }),
   });
@@ -47,7 +47,7 @@ NormalLevelFactory.prototype.createTypicalPlayerTrail = function() {
   return PlayerTrail({
     lineWidth : 2,
     smoothness : 8,
-    style : '#444444',
+    style : '#444',
   });
 }
 
@@ -57,7 +57,7 @@ NormalLevelFactory.prototype.createTypicalGoal = function(x, y) {
       x : x,
       y : y,
       r : 30,
-      style : '#FFFFFF',
+      style : '#FFF',
       filled : false,
     }),
   });
@@ -71,7 +71,7 @@ function(method, x, y, width, height, style) {
       y : y,
       width : width,
       height : height,
-      style : (this.isDuringDevelopment && style) || '#444444',
+      style : (this.isDuringDevelopment && style) || '#444',
     }),
   });
 }
@@ -95,8 +95,8 @@ NormalLevelFactory.prototype.createTypicalCheckpoint = function(x, y) {
       y : y,
       r : 20,
     }),
-    activeStyle : '#FFFFFF',
-    achievedStyle : '#444444',
+    activeStyle : '#FFF',
+    achievedStyle : '#444',
   });
 }
 
