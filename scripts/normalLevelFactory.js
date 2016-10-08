@@ -5,14 +5,8 @@ function NormalLevelFactory(audioContext) {
     return new NormalLevelFactory(audioContext);
   this.isDuringDevelopment = false;
   this.audioContext = audioContext;
-}
-
-NormalLevelFactory.prototype.loadBuffers = function() {
-  return Promise.all([this.loadAudioBuffer('sounds/lunardrive_drip.wav'),
-                      this.loadAudioBuffer('sounds/univ-lyon3_cannet.wav')]).then(buffers => {
-    this.startAudioBuffer = buffers[0];
-    this.warpAudioBuffer = buffers[1];
-  });
+  this.startAudioBufferPromise = this.loadAudioBuffer('sounds/lunardrive_drip.wav');
+  this.warpAudioBufferPromise = this.loadAudioBuffer('sounds/univ-lyon3_cannet.wav')
 }
 
 NormalLevelFactory.prototype.loadAudioBuffer = function(bufferPath) {
@@ -123,8 +117,8 @@ NormalLevelFactory.prototype.createTypicalKeyGuide = function(x, y) {
 NormalLevelFactory.prototype.createTypicalPlayerSoundEmitter = function() {
   return PlayerSoundEmitter({
     audioContext : this.audioContext,
-    startAudioBuffer : this.startAudioBuffer,
-    warpAudioBuffer : this.warpAudioBuffer,
+    startAudioBufferPromise : this.startAudioBufferPromise,
+    warpAudioBufferPromise : this.warpAudioBufferPromise,
   });
 }
 
