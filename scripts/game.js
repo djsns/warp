@@ -10,7 +10,7 @@ function Game(args) {
 }
 
 Game.prototype.startCurrentLevel = function() {
-  this.banner.resetForLevel(this.currentLevelNumber);
+  this.banner.reset();
 
   const level = this.createCurrentLevel();
   const controller = Controller(level.player, level);

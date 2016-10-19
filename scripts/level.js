@@ -8,7 +8,10 @@ function Level(args) {
   this.player = args.player;
   this.gameplayObjects = args.gameplayObjects;
   this.outcomeListeners = [];
+  this.finalMessageListeners = [];
   this.respawnInfoListeners = [];
+  this.victoryMessages = args.victoryMessages;
+  this.failureMessages = args.failureMessages;
   this.isPaused = true;
   this.isFinished = false;
 
@@ -55,6 +58,10 @@ Level.prototype.addOutcomeListener = function(listener) {
   this.outcomeListeners.push(listener);
 }
 
+Level.prototype.addFinalMessageListener = function(listener) {
+  this.finalMessageListeners.push(listener);
+}
+
 Level.prototype.addRespawnInfoListener = function(listener) {
   this.respawnInfoListeners.push(listener);
 }
@@ -84,10 +91,18 @@ Level.prototype.finishWithOutcome = function(outcome) {
   this.player.stop();
 
   this.outcomeListeners.forEach(listener => listener(outcome));
+  const finalMessage = this.getMessageForOutcome(outcome);
+  this.finalMessageListeners.forEach(listener => listener(finalMessage));
 
   if(!outcome) {
     const respawnInfo = this.generateRespawnInfo();
     Object.freeze(respawnInfo);
     this.respawnInfoListeners.forEach(listener => listener(respawnInfo));
   }
+}
+
+Level.prototype.getMessageForOutcome = function(outcome) {
+  if(outcome)
+    return mathUtils.randomArrayElement(this.victoryMessages);
+  else return mathUtils.randomArrayElement(this.failureMessages);
 }

@@ -132,6 +132,8 @@ NormalLevelFactory.prototype.rectObstacle = function(cornerX, cornerY, width, he
 NormalLevelFactory.levelArgFactories = [
   function() {
     return {
+      victoryMessages : ['You won, next level:'],
+      failureMessages : ["It won't get easier."],
       player : this.createTypicalPlayer(200, 200),
       gameplayObjects : [
         this.createTypicalPlayerTrail(),
@@ -153,6 +155,8 @@ NormalLevelFactory.levelArgFactories = [
 
   function() {
     return {
+      victoryMessages :  ['Some progress.', 'That was okay.'],
+      failureMessages : ['Disappointing.', 'Move on, really.', 'Embarrassed yet?'],
       player : this.createTypicalPlayer(60, 540),
       gameplayObjects : [
         this.createTypicalPlayerTrail(),
@@ -174,6 +178,8 @@ NormalLevelFactory.levelArgFactories = [
 
   function() {
     return {
+      victoryMessages : ['How quick. <- joke', 'Wooow, finally.'],
+      failureMessages :  ['Once more?'],
       player : this.createTypicalPlayer(80, 30),
       gameplayObjects : [
         this.createTypicalPlayerTrail(),

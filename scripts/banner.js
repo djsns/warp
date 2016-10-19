@@ -7,9 +7,6 @@ function Banner(args) {
   this.message = args.message;
   this.next = args.next;
   this.retry = args.retry;
-  this.levelNumber = 0;
-  this.victoryMessages = [['You won, next level:'], ['Some progress.', 'That was okay.'], ['How quick. <- joke', 'Wooow, finally.']];
-  this.failureMessages = [["It won't get easier."], ['Disappointing.', 'The first real failure.', 'Embarrassed yet?'], ['Once more?']];
 }
 
 Banner.prototype.listenToLevel = function(level) {
@@ -18,24 +15,22 @@ Banner.prototype.listenToLevel = function(level) {
       this.reportVictory();
     else this.reportFailure();
   });
+  level.addFinalMessageListener(finalMessage => {
+    this.printMessage(finalMessage);
+  });
 }
 
 Banner.prototype.reportVictory = function() {
-  const possibilities = this.victoryMessages[this.levelNumber];
-  this.printMessage(mathUtils.randomArrayElement(possibilities));
   this.hideElement(this.retry);
   this.showElement(this.next);
 }
 
 Banner.prototype.reportFailure = function() {
-  const possibilities = this.failureMessages[this.levelNumber];
-  this.printMessage(mathUtils.randomArrayElement(possibilities));
   this.hideElement(this.next);
   this.showElement(this.retry);
 }
 
-Banner.prototype.resetForLevel = function(levelNumber) {
-  this.levelNumber = levelNumber;
+Banner.prototype.reset = function() {
   this.printMessage('WARP');
   this.hideElement(this.next);
   this.hideElement(this.retry);
