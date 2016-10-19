@@ -3,9 +3,8 @@
 {
   const context = document.getElementById('gameCanvas').getContext('2d');
   const audioContext = new (window.AudioContext || window.webkitAudioContext);
-  const levelFactory = NormalLevelFactory(audioContext);
+  const levelFactory = NormalLevelFactory(context, audioContext);
   const game = Game({
-    context : context,
     banner : Banner({
       message : document.getElementById('gameMessage'),
       next : document.getElementById('gameNext'),

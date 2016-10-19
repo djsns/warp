@@ -9,4 +9,7 @@ const mathUtils = {
       return max;
     else return x;
   },
+  randomArrayElement : function(possibilities) {
+    return possibilities[Math.floor(Math.random()*possibilities.length)];
+  },
 }

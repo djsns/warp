@@ -7,6 +7,9 @@ function Banner(args) {
   this.message = args.message;
   this.next = args.next;
   this.retry = args.retry;
+  this.levelNumber = 0;
+  this.victoryMessages = [['You won, next level:'], ['Some progress.', 'That was okay.'], ['How quick. <- joke', 'Wooow, finally.']];
+  this.failureMessages = [["It won't get easier."], ['Disappointing.', 'The first real failure.', 'Embarrassed yet?'], ['Once more?']];
 }
 
 Banner.prototype.listenToLevel = function(level) {
@@ -18,25 +21,24 @@ Banner.prototype.listenToLevel = function(level) {
 }
 
 Banner.prototype.reportVictory = function() {
-  this.printMessage('You won, next level:');
+  const possibilities = this.victoryMessages[this.levelNumber];
+  this.printMessage(mathUtils.randomArrayElement(possibilities));
   this.hideElement(this.retry);
   this.showElement(this.next);
-  this.next.focus();
 }
 
 Banner.prototype.reportFailure = function() {
-  this.printMessage('how could you ;_;');
+  const possibilities = this.failureMessages[this.levelNumber];
+  this.printMessage(mathUtils.randomArrayElement(possibilities));
   this.hideElement(this.next);
   this.showElement(this.retry);
-  this.retry.focus();
 }
 
-Banner.prototype.reset = function() {
+Banner.prototype.resetForLevel = function(levelNumber) {
+  this.levelNumber = levelNumber;
   this.printMessage('WARP');
   this.hideElement(this.next);
   this.hideElement(this.retry);
-  this.next.blur();
-  this.retry.blur();
 }
 
 Banner.prototype.printMessage = function(message) {
@@ -45,8 +47,10 @@ Banner.prototype.printMessage = function(message) {
 
 Banner.prototype.showElement = function(element) {
   element.hidden = false;
+  element.focus();
 }
 
 Banner.prototype.hideElement = function(element) {
   element.hidden = true;
+  element.blur();
 }

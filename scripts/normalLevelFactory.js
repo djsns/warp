@@ -1,9 +1,10 @@
 'use strict';
 
-function NormalLevelFactory(audioContext) {
+function NormalLevelFactory(context, audioContext) {
   if(!(this instanceof NormalLevelFactory))
-    return new NormalLevelFactory(audioContext);
+    return new NormalLevelFactory(context, audioContext);
   this.isDuringDevelopment = false;
+  this.context = context;
   this.audioContext = audioContext;
   this.startAudioBufferPromise = this.loadAudioBuffer('sounds/lunardrive_drip.wav');
   this.warpAudioBufferPromise = this.loadAudioBuffer('sounds/univ-lyon3_cannet.wav')
@@ -28,6 +29,7 @@ NormalLevelFactory.prototype.createLevelNumber = function(n, respawnInfo) {
   levelArgs.gameplayObjects.push(startCheckpoint);
   const playerSoundEmitter = this.createTypicalPlayerSoundEmitter();
   levelArgs.gameplayObjects.push(playerSoundEmitter);
+  levelArgs.context = this.context;
   return Level(levelArgs);
 }
 
