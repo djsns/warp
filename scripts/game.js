@@ -4,7 +4,6 @@ function Game(args) {
   if(!(this instanceof Game))
     return new Game(args);
 
-  this.context = args.context;
   this.banner = args.banner;
   this.levelFactory = args.levelFactory;
   this.currentLevelNumber = 0;
@@ -21,7 +20,7 @@ Game.prototype.startCurrentLevel = function() {
     this.respawnInfo = respawnInfo;
   });
 
-  level.startGameLoop(this.context);
+  level.startGameLoop();
 }
 
 Game.prototype.createCurrentLevel = function() {

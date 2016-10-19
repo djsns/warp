@@ -15,28 +15,25 @@ Banner.prototype.listenToLevel = function(level) {
       this.reportVictory();
     else this.reportFailure();
   });
+  level.addFinalMessageListener(finalMessage => {
+    this.printMessage(finalMessage);
+  });
 }
 
 Banner.prototype.reportVictory = function() {
-  this.printMessage('You won, next level:');
   this.hideElement(this.retry);
   this.showElement(this.next);
-  this.next.focus();
 }
 
 Banner.prototype.reportFailure = function() {
-  this.printMessage('how could you ;_;');
   this.hideElement(this.next);
   this.showElement(this.retry);
-  this.retry.focus();
 }
 
 Banner.prototype.reset = function() {
   this.printMessage('WARP');
   this.hideElement(this.next);
   this.hideElement(this.retry);
-  this.next.blur();
-  this.retry.blur();
 }
 
 Banner.prototype.printMessage = function(message) {
@@ -45,8 +42,10 @@ Banner.prototype.printMessage = function(message) {
 
 Banner.prototype.showElement = function(element) {
   element.hidden = false;
+  element.focus();
 }
 
 Banner.prototype.hideElement = function(element) {
   element.hidden = true;
+  element.blur();
 }
