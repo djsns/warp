@@ -109,6 +109,7 @@ NormalLevelFactory.prototype.createTypicalKeyGuide = function(x, y) {
   return KeyGuide({
     wasdRadius : 40,
     arrowRadius : 70,
+    style : 'white',
     fontFamily : 'mono',
     fontSize : 32,
     shape : Circle({

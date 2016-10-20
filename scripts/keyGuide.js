@@ -7,6 +7,7 @@ function KeyGuide(args) {
   this.shape = args.shape;
   this.wasdRadius = args.wasdRadius;
   this.arrowRadius = args.arrowRadius;
+  this.style = args.style;
   this.fontFamily = args.fontFamily;
   this.fontSize = args.fontSize;
   this.visible = true;
@@ -19,6 +20,7 @@ KeyGuide.prototype.draw = function(context) {
     const x = this.shape.getCenterX();
     const y = this.shape.getCenterY();
 
+    context.fillStyle = this.style;
     context.font = this.fontSize + 'px ' + this.fontFamily;
     context.textBaseline = 'middle';
     context.textAlign = 'center';
