@@ -16,10 +16,13 @@ GameplayObject.prototype.draw = function(context) {
 GameplayObject.prototype.afterPlayerMoved = function(player) {
   const containsPlayer = this.shape.contains(player.shape);
   const touchesPlayer = this.shape.touches(player.shape);
-  if(containsPlayer && this.onPlayerInside)
+  if(containsPlayer)
     this.onPlayerInside(player);
-  if(!containsPlayer && this.onPlayerNotInside)
-    this.onPlayerNotInside(player);
-  if(touchesPlayer && this.onPlayerTouch)
+  else this.onPlayerNotInside(player);
+  if(touchesPlayer)
     this.onPlayerTouch(player);
 }
+
+GameplayObject.prototype.onPlayerInside = function() {}
+GameplayObject.prototype.onPlayerNotInside = function() {}
+GameplayObject.prototype.onPlayerTouch = function() {}
