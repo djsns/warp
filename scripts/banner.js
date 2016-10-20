@@ -20,6 +20,13 @@ Banner.prototype.listenToLevel = function(level) {
   });
 }
 
+Banner.prototype.listenToLastLevel = function(level) {
+  level.addFinalMessageListener(finalMessage => {
+    this.printMessage(finalMessage);
+    this.showBareMessage();
+  });
+}
+
 Banner.prototype.reportVictory = function() {
   this.hideElement(this.retry);
   this.showElement(this.next);
@@ -28,6 +35,11 @@ Banner.prototype.reportVictory = function() {
 Banner.prototype.reportFailure = function() {
   this.hideElement(this.next);
   this.showElement(this.retry);
+}
+
+Banner.prototype.showBareMessage = function() {
+  this.hideElement(this.next);
+  this.hideElement(this.retry);
 }
 
 Banner.prototype.reset = function() {

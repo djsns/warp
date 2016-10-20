@@ -7,6 +7,7 @@ function Game(args) {
   this.banner = args.banner;
   this.levelFactory = args.levelFactory;
   this.currentLevelNumber = 0;
+  this.levelCount = this.levelFactory.getLevelCount();
 }
 
 Game.prototype.startCurrentLevel = function() {
@@ -15,7 +16,9 @@ Game.prototype.startCurrentLevel = function() {
   const level = this.createCurrentLevel();
   const controller = Controller(level.player, level);
 
-  this.banner.listenToLevel(level);
+  if(this.currentLevelNumber === this.levelCount-1)
+    this.banner.listenToLastLevel(level);
+  else this.banner.listenToLevel(level);
   level.addRespawnInfoListener(respawnInfo => {
     this.respawnInfo = respawnInfo;
   });

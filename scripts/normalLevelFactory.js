@@ -22,7 +22,10 @@ NormalLevelFactory.prototype.loadAudioBuffer = function(bufferPath) {
 }
 
 NormalLevelFactory.prototype.createLevelNumber = function(n, respawnInfo) {
-  const levelArgs = NormalLevelFactory.levelArgFactories[n].call(this);
+  const levelArgFactory = NormalLevelFactory.levelArgFactories[n];
+  if(!levelArgFactory)
+    return null;
+  const levelArgs = levelArgFactory.call(this);
   levelArgs.respawnInfo = respawnInfo;
   const startCheckpoint =
     this.createTypicalCheckpoint(levelArgs.player.x, levelArgs.player.y);
@@ -129,6 +132,10 @@ NormalLevelFactory.prototype.rectObstacle = function(cornerX, cornerY, width, he
                                              width, height, style);
 }
 
+NormalLevelFactory.prototype.getLevelCount = function() {
+  return NormalLevelFactory.levelArgFactories.length;
+}
+
 NormalLevelFactory.levelArgFactories = [
   function() {
     return {
@@ -230,6 +237,16 @@ NormalLevelFactory.levelArgFactories = [
         this.rectObstacle(80, 240, 80, 240, 'white'),
         this.rectObstacle(160, 300, 20, 120, 'gray'),
         this.rectObstacle(240, 240, 80, 240, 'red'),
+      ],
+    };
+  },
+  function() {
+    return {
+      victoryMessages : ["That's all."],
+      failureMessages : ['This is impossible.'],
+      player : this.createTypicalPlayer(300, 300),
+      gameplayObjects : [
+        this.createTypicalGoal(300, 300),
       ],
     };
   },
