@@ -56,16 +56,7 @@ Player.prototype.update = function(dt) {
   this.ay = 0;
   if(this.speedWarpsEnabled)
     this.attemptSpeedWarp();
-  this.applyVelocityCap();
   this.notifyObserversAboutMovement();
-}
-
-Player.prototype.applyVelocityCap = function() {
-  const speed = this.getSpeed();
-  if(speed > this.maxSpeed) {
-    this.vx = this.maxSpeed * this.vx / speed;
-    this.vy = this.maxSpeed * this.vy / speed;
-  }
 }
 
 Player.prototype.attemptSpeedWarp = function() {
