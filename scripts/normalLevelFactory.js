@@ -120,6 +120,24 @@ NormalLevelFactory.prototype.createTypicalKeyGuide = function(x, y) {
   });
 }
 
+NormalLevelFactory.prototype.createTypicalMovementGuide =
+function(text, textX, textY, x, y, width, height) {
+  return MovementGuide({
+    text : text,
+    textX : textX,
+    textY : textY,
+    style : 'white',
+    fontFamily : 'mono',
+    fontSize : 32,
+    shape : Rectangle.fromCorner({
+      x : x,
+      y : y,
+      width : width,
+      height : height,
+    }),
+  });
+}
+
 NormalLevelFactory.prototype.createTypicalPlayerSoundEmitter = function() {
   return PlayerSoundEmitter({
     audioContext : this.audioContext,
@@ -146,6 +164,10 @@ NormalLevelFactory.levelArgFactories = [
       gameplayObjects : [
         this.createTypicalPlayerTrail(),
         this.createTypicalKeyGuide(200, 200),
+        this.createTypicalMovementGuide('↓', 200, 302, 100, 400, 250, 100),
+        this.createTypicalMovementGuide('↓', 200, 334, 100, 400, 250, 100),
+        this.createTypicalMovementGuide('↓', 232, 334, 100, 400, 250, 100),
+        this.createTypicalMovementGuide('↓', 168, 334, 100, 400, 250, 100),
         this.createTypicalBounds(600, 600),
         this.createTypicalCheckpoint(250, 450),
         this.createTypicalGoal(450, 150),
