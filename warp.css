@@ -8,14 +8,16 @@ main {
   margin: 0 auto;
   display: inline-block;
 }
+h1, #gameCanvas {
+  color: white;
+  font-family: monospace;
+  font-size: 2.5em;
+}
 #gameCanvas {
   background-color: black;
 }
 h1 {
   margin: 0.5em 0;
-  color: white;
-  font-family: monospace;
-  font-size: 2.5em;
   position: relative;
 }
 #gameNext, #gameRetry {
