@@ -120,7 +120,7 @@ NormalLevelFactory.prototype.createTypicalKeyGuide = function(x, y) {
   });
 }
 
-NormalLevelFactory.prototype.createTypicalMovementGuide =
+NormalLevelFactory.prototype.createTypicalRectangleMovementGuide =
 function(text, textX, textY, x, y, width, height) {
   return MovementGuide({
     text : text,
@@ -134,6 +134,23 @@ function(text, textX, textY, x, y, width, height) {
       y : y,
       width : width,
       height : height,
+    }),
+  });
+}
+
+NormalLevelFactory.prototype.createTypicalCircleMovementGuide =
+function(text, textX, textY, x, y, r) {
+  return MovementGuide({
+    text : text,
+    textX : textX,
+    textY : textY,
+    style : 'white',
+    fontFamily : 'mono',
+    fontSize : 32,
+    shape : Circle({
+      x : x,
+      y : y,
+      r : r,
     }),
   });
 }
@@ -164,10 +181,13 @@ NormalLevelFactory.levelArgFactories = [
       gameplayObjects : [
         this.createTypicalPlayerTrail(),
         this.createTypicalKeyGuide(200, 200),
-        this.createTypicalMovementGuide('↓', 200, 302, 100, 400, 250, 100),
-        this.createTypicalMovementGuide('↓', 200, 334, 100, 400, 250, 100),
-        this.createTypicalMovementGuide('↓', 232, 334, 100, 400, 250, 100),
-        this.createTypicalMovementGuide('↓', 168, 334, 100, 400, 250, 100),
+        this.createTypicalRectangleMovementGuide('↓', 200, 302, 100, 400, 250, 100),
+        this.createTypicalRectangleMovementGuide('↓', 200, 334, 100, 400, 250, 100),
+        this.createTypicalRectangleMovementGuide('↓', 232, 334, 100, 400, 250, 100),
+        this.createTypicalRectangleMovementGuide('↓', 168, 334, 100, 400, 250, 100),
+        this.createTypicalCircleMovementGuide('→', 200, 450, 250, 450, 20),
+        this.createTypicalRectangleMovementGuide('↑', 450, 300, 400, 100, 100, 100),
+        this.createTypicalRectangleMovementGuide('↑', 450, 268, 400, 100, 100, 100),
         this.createTypicalBounds(600, 600),
         this.createTypicalCheckpoint(250, 450),
         this.createTypicalGoal(450, 150),
@@ -177,7 +197,7 @@ NormalLevelFactory.levelArgFactories = [
         this.rectObstacle(0, 500, 600, 100, 'orange'),
         this.rectObstacle(300, 100, 100, 300, 'brown'),
         this.rectObstacle(100, 350, 200, 50, 'navy'),
-        this.rectObstacle(400, 200, 100, 50, 'navy'),
+        this.rectObstacle(400, 200, 100, 50, 'teal'),
         this.rectObstacle(350, 400, 50, 100, 'yellow'),
       ],
     };
