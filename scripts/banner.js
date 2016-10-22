@@ -44,8 +44,7 @@ Banner.prototype.showBareMessage = function() {
 
 Banner.prototype.reset = function() {
   this.printMessage('WARP');
-  this.hideElement(this.next);
-  this.hideElement(this.retry);
+  this.showBareMessage();
 }
 
 Banner.prototype.printMessage = function(message) {
