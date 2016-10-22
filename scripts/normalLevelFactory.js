@@ -176,7 +176,7 @@ NormalLevelFactory.levelArgFactories = [
   function() {
     return {
       victoryMessages : ['You won, next level:'],
-      failureMessages : ["It won't get easier."],
+      failureMessages : ['Everyone does that.', "I'm out of tips.", 'Can we continue?'],
       player : this.createTypicalPlayer(200, 200),
       gameplayObjects : [
         this.createTypicalPlayerTrail(),
@@ -206,7 +206,7 @@ NormalLevelFactory.levelArgFactories = [
   function() {
     return {
       victoryMessages :  ['Some progress.', 'That was okay.'],
-      failureMessages : ['Disappointing.', 'Move on, really.', 'Embarrassed yet?'],
+      failureMessages : ['Give yourself a while.', 'Ever closer.'],
       player : this.createTypicalPlayer(60, 540),
       gameplayObjects : [
         this.createTypicalPlayerTrail(),
@@ -230,7 +230,7 @@ NormalLevelFactory.levelArgFactories = [
 
   function() {
     return {
-      victoryMessages : ['How quick. <- joke', 'Wooow, finally.'],
+      victoryMessages : ['Took you long enough.', 'Well, finally.'],
       failureMessages :  ['Once more?'],
       player : this.createTypicalPlayer(80, 30),
       gameplayObjects : [
